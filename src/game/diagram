@@ -1,0 +1,80 @@
+@startuml
+
+abstract class Grid{
+- g: Cell[][]
+- gMap: Map<Cell, Point>
+- state: GameState
+- listeners: List<GameListener>
+}
+
+Grid *-- Cell
+
+class Cell{
+- around: Cell[]
+- content: Element
++ isMovable(): bool
++ isEmpty(): bool
++ hasFloor(): bool
+
++ setContent()
++ clearContent()
++ getContent()
++ getAndClearContent()
++ fallUpperContent(): bool
+- explode(Direction)
+- expandExplosion(Direction[])
+}
+
+Cell *-- Element
+
+abstract class Element{
++ {abstract} isMovable(): bool
++ {abstract} getKey(): String
++ {abstract} getScore(): int
++ {abstract} explode(): Direction[]
++ isSolid(): bool
+}
+
+
+Grid *-- GameState
+
+abstract class GameState{
+- score: long
+- moves: int
++ addScore()
++ getScore()
++ addMove()
++ getMoves()
+
+{abstract} + gameOver()
+{abstract} + playerWon()
+}
+
+
+Grid *-- GameListener
+
+interface GameListener{
++ gridUpdated()
++ cellExplosion()
+}
+
+
+Grid *-- MoveMaker
+
+class MoveMaker{
+- map: Map<String, Move>
+- grid: Grid
+- initMap()
++ getMove(i1,j1,i2,j2)
+}
+
+MoveMaker *-- Move
+
+class Move{
+- grid: Grid
+# i1, j1, i2, j2: int
++ setCoords()
++ isValid(): bool
+}
+
+@enduml

@@ -1,0 +1,97 @@
+GameApp
+--------
+
+Build:
+- Crea un CandyFrame y lo pone en Stage
+
+
+
+CandyFrame
+-----------
+
+Build:
+- Agrega AppMenu(), BoardPanel() y ScorePane()
+- Inicializa el juego [game.initGame()]
+- Agrega un GameListener [game.addGameListener()] que re-renderiza la grilla cuando se actualiza
+- Renderiza el tablero (llama gridUpdated)
+- Agrega un EventHandler para clicks que llama a [game.tryMove()]
+
+
+
+CandyGame
+----------
+
+initGame:
+- Instancia el grid (levelClass)
+- Crea un GameState [grid.createState()]
+- Inicializa el grid [grid.initalize()]
+- Agrega un GameListener (CandyGame) que incrementa el puntaje en explosiones
+
+tryMove:
+- Llama a [grid.tryMove()]
+
+
+Grid
+----
+
+createState:
+- Llama a [Level1.newState()]
+
+initialize:
+- Instancia un MoveMaker
+- Instancia un FigureDetector
+- Crea un arreglo de celdas y un mapa de celdas a puntos
+- Rellena las celdas [fillCells()]
+- Hace caer los elementos
+
+
+tryMove:
+- Obtiene el Move
+- Intercambia los contenidos para la verificacion [swapContent()]
+
+- Chequea si es válido [move.isValid()]
+- Si lo es, elimina los elementos del movimiento [move.removeElements()], y hace caer los demás
+- Si no, vuelve a intercambiar los contenidos [swapContent()]
+
+
+fillCells:
+- Llama a [Level1.fillCells()]
+
+
+MoveMaker
+----------
+
+Build:
+- Crea un mapa de todas las posibles combinaciones de caramelos y sus respectivos Movements
+
+
+
+Move
+-----
+
+isValid:
+- Chequea que el caramelo sea adyacente no diagonal y que se cumpla internalValidation()
+
+removeElements:
+- Llama al método heredado
+
+
+CandyMove
+---------
+
+internalValdiation:
+- Instancia un FigureDetector
+- Chequea si se forma una figura en alguno de los dos puntos [detector.checkFigure()]
+
+removeElements:
+- Elimina las figuras que hayan aparecido en ambos puntos [detector.removeFigure()]
+
+
+Level1
+-----
+
+newState:
+- Devuelve un GameState agregandole el puntaje requerido para ganar y la cantidad máxima de movimientos
+
+fillCells:
+- Instancia una Cell con contenido Wall y una CandyGeneratorCell

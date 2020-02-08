@@ -1,0 +1,12 @@
+Se hizo que la Stage sea resizable ya que no entraba el ScorePanel
+
+Se agrego la propeidad goldenCells al Level1State
+Se creo el metodo toString para GameState, y se movio a este la logica de de creacion del mensaje para ScoreBoard
+
+Se creo el enum CellEffect en BoardPanel
+Se agrego el parametro CellEffect a setImage en BoardPanel
+Se agrego la propiedad CellEffect a Cell
+
+Se agrego la verificacion de celdas doradas en tryMove de Level1
+Se agrego el metodo setGoldenCross en Level1
+Se agrego el metodo addGoldenCells en Level1State
