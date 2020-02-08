@@ -3,6 +3,7 @@ package game.frontend;
 import game.backend.CandyGame;
 import game.backend.GameListener;
 import game.backend.cell.Cell;
+import game.backend.element.BombCandy;
 import game.backend.element.Element;
 
 import javafx.animation.KeyFrame;
@@ -59,13 +60,15 @@ public class CandyFrame extends VBox {
 						// Get the new image of the cell
 						Cell cell = CandyFrame.this.game.get(i, j);
 						Element element = cell.getContent();
+
 						Image image = images.getImage(element);
 						BoardPanel.CellEffect effect = cell.getEffect();
+						String overlayText = (cell.getContent() instanceof BombCandy) ? ""+((BombCandy) cell.getContent()).getRemainingMoves() : null;
 
 						// Adds to timeline a call to boardPanel.setImage with new image
 						int finalI = i, finalJ = j;
-						timeLine.getKeyFrames().add(new KeyFrame(frameTime, e -> boardPanel.setImage(finalI, finalJ, null, null)));
-						timeLine.getKeyFrames().add(new KeyFrame(frameTime, e -> boardPanel.setImage(finalI, finalJ, image, effect)));
+						timeLine.getKeyFrames().add(new KeyFrame(frameTime, e -> boardPanel.setImage(finalI, finalJ, null, null, null)));
+						timeLine.getKeyFrames().add(new KeyFrame(frameTime, e -> boardPanel.setImage(finalI, finalJ, image, effect, overlayText)));
 
 					}
 					frameTime = frameTime.add(frameGap);

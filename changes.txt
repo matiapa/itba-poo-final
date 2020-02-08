@@ -1,6 +1,14 @@
-Se hizo que la Stage sea resizable ya que no entraba el ScorePanel
+Commit Inicial
+---------------
 
-Se agrego la propeidad goldenCells al Level1State
+Se hizo que la Stage sea resizable ya que no entraba el ScorePanel
+Se agregaron comentarios
+
+
+Commit Level 1
+--------------
+
+Se agrego la propiedad goldenCells al Level1State
 Se creo el metodo toString para GameState, y se movio a este la logica de de creacion del mensaje para ScoreBoard
 
 Se creo el enum CellEffect en BoardPanel
@@ -10,3 +18,19 @@ Se agrego la propiedad CellEffect a Cell
 Se agrego la verificacion de celdas doradas en tryMove de Level1
 Se agrego el metodo setGoldenCross en Level1
 Se agrego el metodo addGoldenCells en Level1State
+
+
+Commit Level 3
+---------------
+
+Se agrego un menu de eleccion de nivel antes de iniciar el juego
+
+Se movio gran parte de la logica de rellenado de grilla al metodo fillGrid de Grid, dejando a sus implementaciones la posibilidad de pasarle un CandyCellGenerator
+Se movio en Grid, newState e initialize a un nuevo constructor
+
+Se creo la clase Level3
+Se cambio a protected el metodo explode de Cell, y la propiedad grid, para ser accedidas por BombCell
+Se creo la clase BombCell
+
+Se agrego el parametro overlayText a setImage en BoardPanel
+Se agrego la propiedad overlayText a Cell

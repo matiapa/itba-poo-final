@@ -12,8 +12,9 @@ public class Cell {
 	private Grid grid;
 	private Cell[] around = new Cell[Direction.values().length];
 	private Element content;
+
 	private BoardPanel.CellEffect effect;
-	
+
 	public Cell(Grid grid) {
 		this.grid = grid;
 		this.content = new Nothing();
@@ -99,6 +100,5 @@ public class Cell {
 	public BoardPanel.CellEffect getEffect(){ return effect; }
 
 	public void setEffect(BoardPanel.CellEffect effect){ this.effect=effect; }
-
 
 }

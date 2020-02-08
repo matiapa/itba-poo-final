@@ -22,8 +22,7 @@ public class CandyGame implements GameListener {
 			System.out.println("ERROR AL INICIAR");
 		}
 
-		state = grid.createState();
-		grid.initialize();
+		state = grid.state();
 
 		// Add a GameListener that adds score on explosions
 		addGameListener(this);

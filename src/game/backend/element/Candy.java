@@ -3,9 +3,8 @@ package game.backend.element;
 public class Candy extends Element {
 	
 	private CandyColor color;
-	
-	public Candy() {
-	}
+
+	public Candy(){ }
 	
 	public Candy(CandyColor color) {
 		this.color = color;
