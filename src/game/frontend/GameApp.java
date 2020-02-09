@@ -76,7 +76,7 @@ public class GameApp extends Application {
 				break;
 		}
 
-		// Creation of game
+		// Creation of game. Backend.
 		CandyGame game = new CandyGame(levelClass);
 
 		// UI Generation

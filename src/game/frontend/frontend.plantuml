@@ -1,0 +1,8 @@
+class GameApp{
+ + main(String[]): void
+ + start(Stage): void
+ - playLevel(Stage, String): void
+
+}
+
+Application <-- GameApp

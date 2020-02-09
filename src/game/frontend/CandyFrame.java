@@ -9,7 +9,6 @@ import game.backend.element.Element;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.geometry.Point2D;
-import javafx.scene.effect.Effect;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
@@ -97,7 +96,7 @@ public class CandyFrame extends VBox {
 					game().tryMove((int)lastPoint.getX(), (int)lastPoint.getY(), (int)newPoint.getX(), (int)newPoint.getY());
 
 					// Update the ScorePanel
-					scorePanel.updateScore(game().toString());
+					scorePanel.updateStateInfo(game().toString());
 
 					// Reset last point
 					lastPoint = null;

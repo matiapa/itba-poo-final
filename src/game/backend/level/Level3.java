@@ -36,6 +36,7 @@ public class Level3 extends Grid {
 		return ret;
 	}
 
+	// Runs all the grid, updates the remaining movements of each bomb, and counts the bombs on the grid
 	private void updateBombCandies(){
 
 		int remainingMoves = BOMB_INITIAL_MOVES;
@@ -66,8 +67,6 @@ public class Level3 extends Grid {
 		((Level3State) state()).setBombsOnGrid(bombsOnGrid);
 
 	}
-
-	public void bombPlaced(){ ((Level3State) state()).bombPlaced(); }
 
 
 	// -------------------------------------------------------- GAME STATE --------------------------------------------------------

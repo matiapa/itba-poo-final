@@ -25,12 +25,11 @@ Commit Level 3
 
 Se agrego un menu de eleccion de nivel antes de iniciar el juego
 
-Se movio gran parte de la logica de rellenado de grilla al metodo fillGrid de Grid, dejando a sus implementaciones la posibilidad de pasarle un CandyCellGenerator
+Se movio gran parte de la logica de rellenado de grilla al metodo fillGrid de Grid, haciendo que sus implementaciones deban pasarle un GeneratorCell
 Se movio en Grid, newState e initialize a un nuevo constructor
 
 Se creo la clase Level3
-Se cambio a protected el metodo explode de Cell, y la propiedad grid, para ser accedidas por BombCell
-Se creo la clase BombCell
+Se creo la clase BombCandy
+Se creo la clase GeneratorCell y BombCandyGeneratorCell
 
 Se agrego el parametro overlayText a setImage en BoardPanel
-Se agrego la propiedad overlayText a Cell

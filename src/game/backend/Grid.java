@@ -137,6 +137,7 @@ public abstract class Grid {
 			swapContent(i1, j1, i2, j2);
 			return false;
 		}
+
 	}
 
 

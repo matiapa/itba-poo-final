@@ -2,7 +2,7 @@ package game.backend.element;
 
 public class BombCandy extends Candy {
 
-    int remainingMoves;
+    private int remainingMoves;
 
     public BombCandy(CandyColor color, int initialMoves) {
         super(color);

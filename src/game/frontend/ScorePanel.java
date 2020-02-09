@@ -16,7 +16,7 @@ public class ScorePanel extends BorderPane {
 		setCenter(scoreLabel);
 	}
 	
-	public void updateScore(String text) {
+	public void updateStateInfo(String text) {
 		scoreLabel.setText(text);
 	}
 

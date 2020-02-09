@@ -26,14 +26,12 @@ public class Level1 extends Grid {
 	@Override
 	public boolean tryMove(int i1, int j1, int i2, int j2) {
 		boolean ret;
-		// Check for the cells not being gold before trying the move
-		if (ret = (g()[i1][j1].getEffect()==null && g()[i2][j2].getEffect()==null && super.tryMove(i1, j1, i2, j2))) {
+		if (ret = super.tryMove(i1, j1, i2, j2)) {
 			state().addMove();
 			setGoldenCross(i2, j2);
 		}
 		return ret;
 	}
-
 
 	private void setGoldenCross(int r, int c){
 
@@ -64,13 +62,15 @@ public class Level1 extends Grid {
 		public Level1State(int maxMoves) {
 			this.maxMoves = maxMoves;
 		}
-		
+
+		@Override
 		public boolean gameOver() {
 			return playerWon() || getMoves() >= maxMoves;
 		}
-		
+
+		@Override
 		public boolean playerWon() {
-			return goldenCells>=SIZE*SIZE;
+			return goldenCells==SIZE*SIZE;
 		}
 
 		@Override
@@ -78,7 +78,7 @@ public class Level1 extends Grid {
 			return String.format("%s \nRemaining cells: %d", super.toString(), SIZE*SIZE-goldenCells);
 		}
 
-		public void addGoldenCells(int newGoldenCells){
+		private void addGoldenCells(int newGoldenCells){
 			this.goldenCells += newGoldenCells;
 		}
 

@@ -1,0 +1,116 @@
+@startuml
+' --------------- ELEMENT --------------- '
+
+' Element '
+
+abstract class Element{
+ + {abstract} isMovable(): bool
+ + {abstract} getKey(): String
+ + {abstract} getScore(): int
+ + {abstract} explode(): Direction[]
+ + isSolid(): bool
+}
+
+
+' Bomb '
+
+class Bomb{
+ + isMovable(): bool
+ + getKey(): String
+ + getScore(): int
+}
+
+Element <-- Bomb
+
+
+' Wall '
+
+class Wall{
+ + isMovable(): bool
+ + getKey(): String
+}
+
+Element <-- Wall
+
+
+' Nothing '
+
+class Nothing{
+ + isSolid(): bool
+ + isMovable(): bool
+ + getKey(): String
+}
+
+Element <-- Nothing
+
+
+' Candy '
+
+class Candy{
+ - candyColor: CandyColor
+ + getColor(): CandyColor
+ + setColor(CandyColor): void
+ + isMovable(): bool
+ + equals(): bool
+ + getKey(): String
+ + getScore(): long
+}
+
+Element <-- Candy
+Candy *-- CandyColor
+
+
+' CandyColor '
+
+enum CandyColor{
+ RED, GREEN, BLUE, YELLOW, ORANGE, PURPLE
+}
+
+
+' BombCandy '
+
+class BombCandy{
+ - remainingMoves: int
+ + getRemainingMoves(): int
+ + decreaseRemainingMoves(): void
+}
+
+Candy <-- BombCandy
+
+
+' HorizontalStripedCandy '
+
+class HorizontalStripedCandy{
+ - explosion: Direction[]
+ + explode(): Direction[]
+ + getKey(): String
+ + getScore(): long
+}
+
+Candy <-- HorizontalStripedCandy
+
+
+' VerticalStripedCandy '
+
+class VerticalStripedCandy{
+ - explosion: Direction[]
+ + explode(): Direction[]
+ + getKey(): String
+ + getScore(): long
+}
+
+Candy <-- VerticalStripedCandy
+
+
+' WrappedCandy '
+
+class WrappedCandy{
+ - explosion: Direction[]
+ + explode(): Direction[]
+ + getKey(): String
+ + getScore(): long
+}
+
+Candy <-- WrappedCandy
+
+@enduml

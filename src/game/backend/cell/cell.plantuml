@@ -1,0 +1,63 @@
+@startuml
+
+' --------------- CELL --------------- '
+
+' Cell '
+
+class Cell{
+ - around: Cell[]
+ - content: Element
+ + isMovable(): bool
+ + isEmpty(): bool
+ + hasFloor(): bool
+
+ + setContent(Element): void
+ + clearContent(): void
+ + getContent(): Element
+ + getAndClearContent(): Element
+ + fallUpperContent(): bool
+ - explode(Direction): void
+ - expandExplosion(Direction[]): void
+}
+
+Cell *-- Element
+
+
+' GeneratorCell '
+
+abstract class GeneratorCell {
+  + equals(): bool
+  + isEmpty(): bool
+  + isMovable(): bool
+
+  + {abstract} getContent(): Element
+  + getAndClearContent(): Element
+  + setContent(): void
+  + fallUpperContent(): bool
+}
+
+Cell <-- GeneratorCell
+
+
+' CandyGeneratorCell '
+
+class CandyGeneratorCell {
+  + getContent(): Element
+}
+
+GeneratorCell <-- CandyGeneratorCell
+
+
+' BombCandyGeneratorCell '
+
+class BombCandyGeneratorCell {
+ + bombFrequency: double
+ + bombInitialMoves: int
+ + bombsToPlace: int
+ + getContent(): Element
+}
+
+GeneratorCell <-- BombCandyGeneratorCell
+
+
+@enduml
