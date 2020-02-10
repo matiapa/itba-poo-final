@@ -33,3 +33,13 @@ Se creo la clase BombCandy
 Se creo la clase GeneratorCell y BombCandyGeneratorCell
 
 Se agrego el parametro overlayText a setImage en BoardPanel
+
+
+-------------------------
+
+Se cambio a protected la visibilidad de Grid en Cell
+Se agrego a Element el parametro Grid, y constructores con y sin el
+Se agregaron constructores a Candy con y sin parametro Grid
+
+Se creo una clase SpecialCandyGenerator
+Se cambio la clase BombCandyGeneratorCell para que extienda de ella

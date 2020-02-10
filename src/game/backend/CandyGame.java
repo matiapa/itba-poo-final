@@ -54,9 +54,8 @@ public class CandyGame implements GameListener {
 		state.addScore(e.getScore());
 	}
 	
-	@Override
-	public void gridUpdated() {
-		//
-	}
+	@Override public void gridUpdated() { }
+
+	@Override public void onValidMove(){ }
 
 }

@@ -75,10 +75,8 @@ public class CandyFrame extends VBox {
 				timeLine.play();
 			}
 
-			@Override
-			public void cellExplosion(Element e) {
-				//
-			}
+			@Override public void cellExplosion(Element e){}
+			@Override public void onValidMove(){}
 
 		});
 

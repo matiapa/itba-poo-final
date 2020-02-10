@@ -15,7 +15,7 @@ public class Level3 extends Grid {
 
 
 	public Level3(){
-		super(new Level3State(NUMBER_OF_BOMBS));
+		super(new Level3State());
 	}
 
 
@@ -38,39 +38,12 @@ public class Level3 extends Grid {
 		return ret;
 	}
 
+
+	public void informBombRemainingMoves(int newRemainingMovements){ ((Level3State) state()).informBombRemainingMoves(newRemainingMovements); }
+
+	public void bombDeactivated(){ ((Level3State) state()).bombDeactivated(); }
+
 	public void bombExploded(){ ((Level3State) state()).bombExploded(); }
-
-	// Runs all the grid, updates the remaining movements of each bomb, and counts the bombs on the grid
-	private void updateBombCandies(){
-
-		int remainingMoves = BOMB_INITIAL_MOVES;
-		int bombsOnGrid = 0;
-
-		for(int i=0; i<SIZE; i++){
-			for(int j=0; j<SIZE; j++){
-				if(g()[i][j].getContent() instanceof BombCandy){
-
-					BombCandy bomb = (BombCandy) g()[i][j].getContent();
-
-					// Decrease the remaining moves
-					if(bomb.decreaseRemainingMoves()){
-						((Level3State) state()).bombExploded();
-					}
-
-					// Update the remaining moves
-					remainingMoves = bomb.getRemainingMoves() < remainingMoves ? bomb.getRemainingMoves() : remainingMoves;
-
-					// Update bombs on grid
-					bombsOnGrid += 1;
-
-				}
-			}
-		}
-
-		((Level3State) state()).setRemainingMovements(remainingMoves);
-		((Level3State) state()).setBombsOnGrid(bombsOnGrid);
-
-	}
 
 
 	// -------------------------------------------------------- GAME STATE --------------------------------------------------------
@@ -78,34 +51,28 @@ public class Level3 extends Grid {
 
 	static private class Level3State extends GameState {
 
-		private long bombsToPlace;
+		private int remainingMovements = BOMB_INITIAL_MOVES;
+		private long bombsDeactivated=0;
 		private boolean bombExploded=false;
-
-		private int remainingMovements;
-		private int bombsOnGrid;
-
-
-		public Level3State(int numberOfBombs) {
-			this.bombsToPlace = numberOfBombs;
-		}
 
 
 		public boolean gameOver() { return playerWon() || bombExploded; }
 		
-		public boolean playerWon() {
-			return bombsToPlace==0 && bombsOnGrid==0;
-		}
+		public boolean playerWon() { return bombsDeactivated == NUMBER_OF_BOMBS; }
 
 		@Override
 		public String toString() {
 			return String.format("%s \nRemaining movements: %d", super.toString(), remainingMovements);
 		}
 
+		private void informBombRemainingMoves(int newRemainingMovements){
+			remainingMovements = newRemainingMovements<remainingMovements ? newRemainingMovements : remainingMovements;
+		}
+
+		private void bombDeactivated(){ bombsDeactivated += 1; }
+
 		private void bombExploded(){ bombExploded=true; }
 
-		private void setRemainingMovements(int remainingMovements){ this.remainingMovements = remainingMovements; }
-
-		public void setBombsOnGrid(int bombsOnGrid) { this.bombsOnGrid = bombsOnGrid; }
 	}
 
 }
