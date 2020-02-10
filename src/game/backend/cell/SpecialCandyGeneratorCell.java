@@ -25,9 +25,12 @@ public abstract class SpecialCandyGeneratorCell extends GeneratorCell{
     public Element getContent() {
         int i = (int)(Math.random() * CandyColor.values().length);
         try {
-            return specialCandiesToPlace>0 && Math.random()<specialCandyFrequency
-                    ? specialCandy.getDeclaredConstructor(Grid.class, CandyColor.class).newInstance(grid, CandyColor.values()[i])
-                    : new Candy(CandyColor.values()[i]);
+            if(specialCandiesToPlace>0 && Math.random()<specialCandyFrequency){
+                specialCandiesToPlace -= 1;
+                return specialCandy.getDeclaredConstructor(Grid.class, CandyColor.class).newInstance(grid, CandyColor.values()[i]);
+            }else{
+                return new Candy(CandyColor.values()[i]);
+            }
         } catch(IllegalAccessException | InstantiationException | NoSuchMethodException | InvocationTargetException e) {
             e.printStackTrace();
             return null;

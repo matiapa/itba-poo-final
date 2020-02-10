@@ -8,7 +8,7 @@ import game.backend.element.BombCandy;
 public class Level3 extends Grid {
 
 	private static int BOMB_INITIAL_MOVES = 10;
-	private static int NUMBER_OF_BOMBS = 2*SIZE;
+	private static int NUMBER_OF_BOMBS = 20;
 	private static double BOMB_FREQUENCY = 0.1;
 
 	public static int getInitialMoves(){ return BOMB_INITIAL_MOVES; }
@@ -22,7 +22,7 @@ public class Level3 extends Grid {
 	@Override
 	protected void fillCells() {
 		// An equal amount of bombs to place is assigned to each genCell
-		genCell = new BombCandyGeneratorCell(this, NUMBER_OF_BOMBS/SIZE, BOMB_FREQUENCY);
+		genCell = new BombCandyGeneratorCell(this, NUMBER_OF_BOMBS, BOMB_FREQUENCY);
 		super.fillCells();
 	}
 

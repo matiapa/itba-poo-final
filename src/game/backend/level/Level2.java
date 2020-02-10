@@ -5,13 +5,13 @@ import game.backend.Grid;
 import game.backend.cell.CandyGeneratorCell;
 import game.frontend.BoardPanel;
 
-public class Level1 extends Grid {
+public class Level2 extends Grid {
 
 	
 	private static int MAX_MOVES = 20;
 
 
-	public Level1(){
+	public Level2(){
 		super(new Level1State(MAX_MOVES));
 	}
 

@@ -1,11 +1,8 @@
-Commit Inicial
 ---------------
 
 Se hizo que la Stage sea resizable ya que no entraba el ScorePanel
 Se agregaron comentarios
 
-
-Commit Level 1
 --------------
 
 Se agrego la propiedad goldenCells al Level1State
@@ -19,8 +16,6 @@ Se agrego la verificacion de celdas doradas en tryMove de Level1
 Se agrego el metodo setGoldenCross en Level1
 Se agrego el metodo addGoldenCells en Level1State
 
-
-Commit Level 3
 ---------------
 
 Se agrego un menu de eleccion de nivel antes de iniciar el juego
@@ -34,7 +29,6 @@ Se creo la clase GeneratorCell y BombCandyGeneratorCell
 
 Se agrego el parametro overlayText a setImage en BoardPanel
 
-
 -------------------------
 
 Se cambio a protected la visibilidad de Grid en Cell
@@ -43,3 +37,14 @@ Se agregaron constructores a Candy con y sin parametro Grid
 
 Se creo una clase SpecialCandyGenerator
 Se cambio la clase BombCandyGeneratorCell para que extienda de ella
+
+-----------------------
+
+Se actualizo la logica de Level3 para que funcione con las llamadas a metodos de grid desde BombCandy
+
+-------------------------
+
+Se cambiaron los nombres de los niveles
+Se cambio el menu de niveles para que los muestre todos
+Se arreglo la logica de distribucion de SpecialCandyGeneratorCell
+Se cambio la cantidad de caramelos que se asigna a GeneratorCell en Level3

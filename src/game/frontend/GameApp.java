@@ -1,7 +1,7 @@
 package game.frontend;
 
 import game.backend.CandyGame;
-import game.backend.level.Level1;
+import game.backend.level.Level2;
 import game.backend.level.Level3;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -33,7 +33,7 @@ public class GameApp extends Application {
 		Label title = new Label("Candy Crush");
 		title.setFont(new Font("Arial", 24));
 
-		ChoiceBox<String> levelChoice = new ChoiceBox<String>(FXCollections.observableArrayList("Level 1", "Level 3"));
+		ChoiceBox<String> levelChoice = new ChoiceBox<String>(FXCollections.observableArrayList("Level 2", "Level 3", "Level 4", "Level 5"));
 
 		Button playButton = new Button("Play");
 		playButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -65,11 +65,17 @@ public class GameApp extends Application {
 
 		Class levelClass;
 		switch(levelName){
-			case "Level 1":
-				levelClass = Level1.class;
+			case "Level 2":
+				levelClass = Level2.class;
 				break;
 			case "Level 3":
 				levelClass = Level3.class;
+				break;
+			case "Level 4":
+				levelClass = Level3.class; //TODO: Update with new level
+				break;
+			case "Level 5":
+				levelClass = Level3.class; //TODO: Update with new level
 				break;
 			default:
 				levelClass = null;
