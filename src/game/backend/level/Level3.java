@@ -11,6 +11,8 @@ public class Level3 extends Grid {
 	private static int NUMBER_OF_BOMBS = 2*SIZE;
 	private static double BOMB_FREQUENCY = 0.1;
 
+	public static int getInitialMoves(){ return BOMB_INITIAL_MOVES; }
+
 
 	public Level3(){
 		super(new Level3State(NUMBER_OF_BOMBS));
@@ -20,7 +22,7 @@ public class Level3 extends Grid {
 	@Override
 	protected void fillCells() {
 		// An equal amount of bombs to place is assigned to each genCell
-		genCell = new BombCandyGeneratorCell(this, NUMBER_OF_BOMBS/SIZE, BOMB_FREQUENCY, BOMB_INITIAL_MOVES);
+		genCell = new BombCandyGeneratorCell(this, NUMBER_OF_BOMBS/SIZE, BOMB_FREQUENCY);
 		super.fillCells();
 	}
 
@@ -30,11 +32,13 @@ public class Level3 extends Grid {
 		boolean ret;
 		if (ret = super.tryMove(i1, j1, i2, j2)) {
 			state().addMove();
-			updateBombCandies();
+			//updateBombCandies();
 			wasUpdated();
 		}
 		return ret;
 	}
+
+	public void bombExploded(){ ((Level3State) state()).bombExploded(); }
 
 	// Runs all the grid, updates the remaining movements of each bomb, and counts the bombs on the grid
 	private void updateBombCandies(){
@@ -96,9 +100,6 @@ public class Level3 extends Grid {
 		public String toString() {
 			return String.format("%s \nRemaining movements: %d", super.toString(), remainingMovements);
 		}
-
-
-		private void bombPlaced(){ bombsToPlace-=1; }
 
 		private void bombExploded(){ bombExploded=true; }
 

@@ -130,6 +130,7 @@ public abstract class Grid {
 		swapContent(i1, j1, i2, j2);
 
 		if (move.isValid()) {
+			validMoveMade();
 			move.removeElements();
 			fallElements();
 			return true;
@@ -217,6 +218,12 @@ public abstract class Grid {
 	public void cellExplosion(Element e) {
 		for (GameListener gl: listeners) {
 			gl.cellExplosion(e);
+		}
+	}
+
+	public void validMoveMade(){
+		for (GameListener gl: listeners) {
+			gl.onValidMove();
 		}
 	}
 

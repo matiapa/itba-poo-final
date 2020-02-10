@@ -1,12 +1,30 @@
 package game.backend.element;
 
+import game.backend.GameListener;
+import game.backend.Grid;
+import game.backend.level.Level3;
+
 public class BombCandy extends Candy {
 
-    private int remainingMoves;
+    BombCandy(){
+        grid.addListener(new GameListener(){
 
-    public BombCandy(CandyColor color, int initialMoves) {
-        super(color);
-        this.remainingMoves = initialMoves;
+            @Override public void gridUpdated(){}
+
+            @Override public void cellExplosion(Element e){}
+
+            @Override
+            public void onValidMove() {
+
+            }
+
+        });
+    }
+
+    private int remainingMoves = Level3.getInitialMoves();
+
+    public BombCandy(Grid grid, CandyColor color) {
+        super(grid, color);
     }
 
     public int getRemainingMoves(){ return remainingMoves; }
@@ -15,5 +33,11 @@ public class BombCandy extends Candy {
         remainingMoves -= 1;
         return remainingMoves<=0;
     }
+
+    /*@Override
+    public Direction[] explode() {
+        ((Level3) grid).bombExploded();
+        return super.explode();
+    }*/
 
 }

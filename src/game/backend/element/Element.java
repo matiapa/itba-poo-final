@@ -1,9 +1,18 @@
 package game.backend.element;
 
+import game.backend.Grid;
 import game.backend.move.Direction;
 
-public abstract class Element {
-	
+public abstract class Element{
+
+	protected Grid grid;
+
+	Element(){ }
+
+	Element(Grid grid){
+		this.grid = grid;
+	}
+
 	public abstract boolean isMovable();
 	
 	public abstract String getKey();
@@ -23,5 +32,7 @@ public abstract class Element {
 	public long getScore() {
 		return 0;
 	}
+
+
 	
 }

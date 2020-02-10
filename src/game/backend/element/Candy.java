@@ -1,5 +1,7 @@
 package game.backend.element;
 
+import game.backend.Grid;
+
 public class Candy extends Element {
 	
 	private CandyColor color;
@@ -7,9 +9,20 @@ public class Candy extends Element {
 	public Candy(){ }
 	
 	public Candy(CandyColor color) {
+		super();
 		this.color = color;
 	}
-	
+
+	public Candy(Grid grid){
+		super(grid);
+	}
+
+	public Candy(Grid grid, CandyColor color){
+		super(grid);
+		this.color = color;
+	}
+
+
 	public CandyColor getColor() {
 		return color;
 	}
