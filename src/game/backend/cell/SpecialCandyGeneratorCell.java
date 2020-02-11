@@ -10,9 +10,9 @@ import java.lang.reflect.InvocationTargetException;
 
 public abstract class SpecialCandyGeneratorCell extends GeneratorCell{
 
-    Class<Candy> specialCandy;
-    int specialCandiesToPlace;
-    double specialCandyFrequency;
+    private Class<Candy> specialCandy;
+    private int specialCandiesToPlace;
+    private double specialCandyFrequency;
 
     public SpecialCandyGeneratorCell(Grid grid, Class specialCandyClass, int specialCandiesAmount, double specialCandyFrequency) {
         super(grid);

@@ -34,7 +34,6 @@ Se agrego el parametro overlayText a setImage en BoardPanel
 Se cambio a protected la visibilidad de Grid en Cell
 Se agrego a Element el parametro Grid, y constructores con y sin el
 Se agregaron constructores a Candy con y sin parametro Grid
-
 Se creo una clase SpecialCandyGenerator
 Se cambio la clase BombCandyGeneratorCell para que extienda de ella
 
@@ -61,3 +60,9 @@ Se agrego a CandyFrame metodos para mostrar dialogos de victoria y derrota
 ----------------------------
 
 Se movio el enum CellEffect a Cell, y se movio la responsabilidad de generar el efecto a un switch en BoardPanel
+
+---------------------------------
+
+Se agrego el Timer a Level4
+Se agrego el metodo scorePanelUpdated() a GameListener
+Se implemento el metodo scorePanelUpdated() en CandyFrame
