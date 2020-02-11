@@ -69,4 +69,8 @@ public class CandyGame implements GameListener {
 
 	@Override public void onValidMove(){}
 
+	@Override
+	public void scorePanelUpdated() {
+
+	}
 }

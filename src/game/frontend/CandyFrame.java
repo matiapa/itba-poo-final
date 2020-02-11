@@ -91,6 +91,11 @@ public class CandyFrame extends VBox {
 				timeLine.play();
 			}
 
+			@Override
+			public void scorePanelUpdated() {
+				scorePanel.updateStateInfo(game().toString());
+			}
+
 			@Override public void cellExplosion(Element e){}
 			@Override public void onValidMove(){}
 

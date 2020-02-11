@@ -9,5 +9,7 @@ public interface GameListener {
 	void cellExplosion(Element e);
 
 	void onValidMove();
-	
+
+	void scorePanelUpdated();
+
 }

@@ -36,9 +36,7 @@ public abstract class Grid {
 
 	// -------------------------------------------------------- CONSTRUCTION --------------------------------------------------------
 
-	public Grid(GameState state){
-
-		this.state = state;
+	public Grid(){
 
 		moveMaker = new MoveMaker(this);
 		figureDetector = new FigureDetector(this);
@@ -51,9 +49,17 @@ public abstract class Grid {
 			}
 		}
 
+	}
+
+	public void initialize(GameState state){
+		this.state = state;
 		fillCells();
 		fallElements();
+	}
 
+	public Grid(GameState state){
+		this();
+		initialize(state);
 	}
 
 
@@ -224,6 +230,14 @@ public abstract class Grid {
 	public void validMoveMade(){
 		for (GameListener gl: listeners) {
 			gl.onValidMove();
+		}
+	}
+
+	protected void scorePanelUpdated(){
+		if (listeners.size() > 0) {
+			for (GameListener gl: listeners) {
+				gl.scorePanelUpdated();
+			}
 		}
 	}
 

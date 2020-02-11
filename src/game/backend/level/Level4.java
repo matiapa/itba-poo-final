@@ -3,22 +3,25 @@ package game.backend.level;
 import game.backend.GameState;
 import game.backend.Grid;
 import game.backend.cell.TimeProviderCandyGeneratorCell;
+import javafx.application.Platform;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Level4 extends Grid {
 
     private static int INITIAL_TIME = 60;
-
-    private static int NUMBER_OF_BOMBS = 20;
-    public static int BOMB_ADDITIONAL_TIME = 20;
-    private static double BOMB_FREQUENCY = 0.1;
+    private static int TIME_BONUS_AMOUNT = 20;
+    public static int TIME_BONUS_ADDITIONAL_TIME = 20;
+    private static double TIME_BONUS_FREQUENCY = 0.1;
 
     public Level4() {
-        super(new Level4State());
+        super();
+        initialize(new Level4State());
     }
 
     @Override
     protected void fillCells() {
-        genCell = new TimeProviderCandyGeneratorCell(this, NUMBER_OF_BOMBS, BOMB_FREQUENCY);
+        genCell = new TimeProviderCandyGeneratorCell(this, TIME_BONUS_AMOUNT, TIME_BONUS_FREQUENCY);
         super.fillCells();
     }
 
@@ -38,39 +41,38 @@ public class Level4 extends Grid {
 
 // -------------------------------------------------------- GAME STATE --------------------------------------------------------
 
-    static private class Level4State extends GameState {
+    private class Level4State extends GameState {
 
         private int timeProviderConsumed = 0;
-
         private boolean timesUp = false;
-        private int timer;
-        /*private Timer timer = new Timer();//TODO
+        private int timeCount = Level4.INITIAL_TIME;
 
 
-        private TimerTask timerTask = new TimerTask() {
-            @Override
-            public void run() {
-                Platform.runLater(new TimerTask() {
-                    @Override
-                    public void run() {
+        Level4State(){
+            TimerTask timerTask = new TimerTask() {
+                @Override
+                public void run() {
+                    Platform.runLater(new TimerTask() {
+                        @Override
+                        public void run() {
+                            timeCount -= 1;
+                            if (timeCount == 0)//TODO
+                                timesUp();
+                            scorePanelUpdated();
+                        }
+                    });
+                }
+            };
+            (new Timer()).scheduleAtFixedRate(timerTask, 0, 1000);
+        }
 
-                    }
-                });
-            }
-        };
-        timer.scheduleAtFixedRate(timerTask,0,1000);
-        */
 
         public boolean gameOver() {
-            if (timer == 0)//TODO
-                timesUp();
-
             return playerWon() || timesUp;
         }
 
-        public boolean playerWon() {//TODO y timer es distinto de cero
-
-            return timeProviderConsumed == NUMBER_OF_BOMBS && timer != 0;
+        public boolean playerWon() {
+            return timeProviderConsumed == TIME_BONUS_AMOUNT && timeCount != 0;
         }
 
         private void timesUp() {
@@ -78,13 +80,14 @@ public class Level4 extends Grid {
         }
 
         private void timeProviderConsumed(){
-            timeProviderConsumed++;
-            timer += BOMB_ADDITIONAL_TIME;
-        } //TODO timer
+            System.out.println("Consumed");
+            //timeProviderConsumed++;
+            //timeCount += TIME_BONUS_ADDITIONAL_TIME;
+        }
 
         @Override
         public String toString() {
-            return String.format("%s \nRemaining time: %d", super.toString(), timer);
+            return String.format("%s \nRemaining time: %d", super.toString(), timeCount);
         }
     }
 }
