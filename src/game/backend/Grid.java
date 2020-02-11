@@ -18,7 +18,7 @@ import java.util.Map;
 public abstract class Grid {
 
 	private static final int SIZE = 9;
-	private Cell[][] grid = new Cell[SIZE][SIZE];
+	protected Cell[][] grid = new Cell[SIZE][SIZE];
 	private Map<Cell, Point> gMap = new HashMap<>();
 
 	private GameState state;
@@ -64,35 +64,35 @@ public abstract class Grid {
 		// Fills the grid
 
 		// Corners
-		getGrid()[0][0].setAround(genCell, getGrid()[1][0], wallCell, getGrid()[0][1]);
-		getGrid()[0][getSize()-1].setAround(genCell, getGrid()[1][getSize()-1], getGrid()[0][getSize()-2], wallCell);
-		getGrid()[getSize()-1][0].setAround(getGrid()[getSize()-2][0], wallCell, wallCell, getGrid()[getSize()-1][1]);
-		getGrid()[getSize()-1][getSize()-1].setAround(getGrid()[getSize()-2][getSize()-1], wallCell, getGrid()[getSize()-1][getSize()-2], wallCell);
+		grid[0][0].setAround(genCell, grid[1][0], wallCell, grid[0][1]);
+		grid[0][getSize()-1].setAround(genCell, grid[1][getSize()-1], grid[0][getSize()-2], wallCell);
+		grid[getSize()-1][0].setAround(grid[getSize()-2][0], wallCell, wallCell, grid[getSize()-1][1]);
+		grid[getSize()-1][getSize()-1].setAround(grid[getSize()-2][getSize()-1], wallCell, grid[getSize()-1][getSize()-2], wallCell);
 
 		// Upper line
 		for (int j = 1; j < getSize()-1; j++) {
-			getGrid()[0][j].setAround(genCell, getGrid()[1][j], getGrid()[0][j-1], getGrid()[0][j+1]);
+			grid[0][j].setAround(genCell, grid[1][j], grid[0][j-1], grid[0][j+1]);
 		}
 
 		// Bottom line
 		for (int j = 1; j < getSize()-1; j++) {
-			getGrid()[getSize()-1][j].setAround(getGrid()[getSize()-2][j], wallCell, getGrid()[getSize()-1][j-1], getGrid()[getSize()-1][j+1]);
+			grid[getSize()-1][j].setAround(grid[getSize()-2][j], wallCell, grid[getSize()-1][j-1], grid[getSize()-1][j+1]);
 		}
 
 		// Left line
 		for (int i = 1; i < getSize()-1; i++) {
-			getGrid()[i][0].setAround(getGrid()[i-1][0], getGrid()[i+1][0], wallCell , getGrid()[i][1]);
+			grid[i][0].setAround(grid[i-1][0], grid[i+1][0], wallCell , grid[i][1]);
 		}
 
 		// Right line
 		for (int i = 1; i < getSize()-1; i++) {
-			getGrid()[i][getSize()-1].setAround(getGrid()[i-1][getSize()-1], getGrid()[i+1][getSize()-1], getGrid()[i][getSize()-2], wallCell);
+			grid[i][getSize()-1].setAround(grid[i-1][getSize()-1], grid[i+1][getSize()-1], grid[i][getSize()-2], wallCell);
 		}
 
 		// Central cells
 		for (int i = 1; i < getSize()-1; i++) {
 			for (int j = 1; j < getSize()-1; j++) {
-				getGrid()[i][j].setAround(getGrid()[i-1][j], getGrid()[i+1][j], getGrid()[i][j-1], getGrid()[i][j+1]);
+				grid[i][j].setAround(grid[i-1][j], grid[i+1][j], grid[i][j-1], grid[i][j+1]);
 			}
 		}
 	};
@@ -239,7 +239,6 @@ public abstract class Grid {
 	public static int getSize() { return SIZE; }
 	public boolean getGridLoadReady(){ return gridLoadReady; }
 
-	protected Cell[][] getGrid() { return grid; }
 	protected void setGenCell(GeneratorCell genCell) { this.genCell = genCell; }
 	protected GameState getState(){ return state; }
 

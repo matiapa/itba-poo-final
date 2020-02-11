@@ -73,3 +73,5 @@ Se corrigio una llamada erronea a timeProviderConsumed()
 Se agrego el parametro gridLoaded a Grid, y se lo utilizo en los metodos exploded() de BombCandy y TimeBonusCandy
 
 ---------------------------------------------------------------------------------------------------------
+
+Se redujeron muchos niveles de accesos excesivos

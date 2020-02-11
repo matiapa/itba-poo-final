@@ -12,7 +12,7 @@ public abstract class GeneratorCell extends Cell {
 	}
 	
 	@Override
-	public boolean isMovable(){
+	protected boolean isMovable(){
 		return true;
 	}
 	

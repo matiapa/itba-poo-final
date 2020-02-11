@@ -27,7 +27,7 @@ public abstract class SpecialCandyGeneratorCell extends GeneratorCell{
         try {
             if(specialCandiesToPlace>0 && Math.random()<specialCandyFrequency){
                 specialCandiesToPlace -= 1;
-                return specialCandy.getDeclaredConstructor(Grid.class, CandyColor.class).newInstance(getGrid(), CandyColor.values()[i]);
+                return specialCandy.getDeclaredConstructor(Grid.class, CandyColor.class).newInstance(grid, CandyColor.values()[i]);
             }else{
                 return new Candy(CandyColor.values()[i]);
             }

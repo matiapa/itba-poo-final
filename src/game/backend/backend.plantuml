@@ -61,7 +61,7 @@ abstract class Grid{
 
  + {static} getSize(): int
  + getGridLoadReady(): bool
- # getGrid(): Cell[][]
+ # grid: Cell[][]
  # setGenCell(GeneratorCell): void
  # getState(): GameState
 
@@ -106,7 +106,7 @@ interface GameListener{
 ' Cell '
 
 class Cell{
- - grid: Grid
+ # grid: Grid
  - around: Cell[]
  - content: Element
  - effect: CellEffect
@@ -122,13 +122,11 @@ class Cell{
  + getContent(): Element
  + fallUpperContent(): bool
  + isEmpty(): bool
- - isMovable(): bool
- - getAndClearContent(): Element
+ # isMovable(): bool
+ # getAndClearContent(): Element
 
  + getEffect(): CellEffect
- # setEffect(CellEffect): void
-
- # getGrid(): Grid
+ + setEffect(CellEffect): void
 }
 
 Cell *-- Element
@@ -188,13 +186,13 @@ class BombCandyGeneratorCell {
 SpecialCandyGeneratorCell <-- BombCandyGeneratorCell
 
 
-' TimeProviderCandyGeneratorCell '
+' TimeBonusCandyGeneratorCell '
 
-class TimeProviderCandyGeneratorCell {
+class TimeBonusCandyGeneratorCell {
 
 }
 
-SpecialCandyGeneratorCell <-- TimeProviderCandyGeneratorCell
+SpecialCandyGeneratorCell <-- TimeBonusCandyGeneratorCell
 
 
 

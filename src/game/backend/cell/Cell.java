@@ -7,7 +7,7 @@ import game.backend.move.Direction;
 
 public class Cell {
 	
-	private Grid grid;
+	protected Grid grid;
 	private Cell[] around = new Cell[Direction.values().length];
 	private Element content;
 	private CellEffect effect;
@@ -92,11 +92,11 @@ public class Cell {
 		return !content.isSolid();
 	}
 
-	private boolean isMovable(){
+	protected boolean isMovable(){
 		return content.isMovable();
 	}
 
-	private Element getAndClearContent() {
+	protected Element getAndClearContent() {
 		if (content.isMovable()) {
 			Element ret = content;
 			this.content = new Nothing();
@@ -110,13 +110,11 @@ public class Cell {
 
 	public CellEffect getEffect(){ return effect; }
 
-	protected void setEffect(CellEffect effect){ this.effect=effect; }
+	public void setEffect(CellEffect effect){ this.effect=effect; }
 
 	public enum CellEffect{ GOLDEN }
 
 
 	// -------------------------------------------------------- GRID --------------------------------------------------------
-
-	protected Grid getGrid(){ return this.grid; }
 
 }

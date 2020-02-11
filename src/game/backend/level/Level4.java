@@ -10,8 +10,8 @@ import java.util.TimerTask;
 public class Level4 extends Grid {
 
     private static int INITIAL_TIME = 60;
-    private static int TIME_BONUS_ADDITIONAL_TIME = 10;
-    private static int TIME_BONUS_AMOUNT = 20;
+    private static int TIME_BONUS = 10;
+    private static int NUMBER_OF_TIME_BONUS = 20;
     private static double TIME_BONUS_FREQUENCY = 0.1;
 
     public Level4() {
@@ -21,7 +21,7 @@ public class Level4 extends Grid {
 
     @Override
     protected void fillCells() {
-        setGenCell(new TimeBonusCandyGeneratorCell(this, TIME_BONUS_AMOUNT, TIME_BONUS_FREQUENCY));
+        setGenCell(new TimeBonusCandyGeneratorCell(this, NUMBER_OF_TIME_BONUS, TIME_BONUS_FREQUENCY));
         super.fillCells();
     }
 
@@ -35,7 +35,7 @@ public class Level4 extends Grid {
         return ret;
     }
 
-    public static int getAdditionalTime() { return TIME_BONUS_ADDITIONAL_TIME; }
+    public static int getAdditionalTime() { return TIME_BONUS; }
 
     public void timeBonusConsumed() {
         ((Level4State) getState()).timeProviderConsumed();
@@ -58,7 +58,7 @@ public class Level4 extends Grid {
                         @Override
                         public void run() {
                             timeCount -= 1;
-                            if (timeCount == 0)//TODO
+                            if (timeCount == 0)
                                 timesUp();
                             scorePanelUpdated();
                         }
@@ -74,7 +74,7 @@ public class Level4 extends Grid {
         }
 
         public boolean playerWon() {
-            return timeBonusConsumed == TIME_BONUS_AMOUNT && timeCount != 0;
+            return timeBonusConsumed == NUMBER_OF_TIME_BONUS && timeCount != 0;
         }
 
         @Override
@@ -88,9 +88,8 @@ public class Level4 extends Grid {
         }
 
         private void timeProviderConsumed(){
-            System.out.println("Consumed");
-            //timeProviderConsumed++;
-            //timeCount += TIME_BONUS_ADDITIONAL_TIME;
+            timeBonusConsumed++;
+            timeCount += TIME_BONUS;
         }
 
 

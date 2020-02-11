@@ -10,7 +10,7 @@ public class CandyGame implements GameListener {
 	public CandyGame(Class<Grid> clazz) {
 		// Create the grid
 		try {
-			grid = (Grid)clazz.newInstance();
+			grid = clazz.newInstance();
 		} catch(IllegalAccessException | InstantiationException e) {
 			System.out.println("ERROR AL INICIAR");
 		}

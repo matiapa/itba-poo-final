@@ -39,12 +39,12 @@ public class Level2 extends Grid {
 		int newGoldenCells = 0;
 
 		for(int i=0; i<getSize(); i++){
-			if(getGrid()[r][i].getEffect()==null){
-				getGrid()[r][i].setEffect(Cell.CellEffect.GOLDEN);
+			if(grid[r][i].getEffect()==null){
+				grid[r][i].setEffect(Cell.CellEffect.GOLDEN);
 				newGoldenCells += 1;
 			}
-			if(getGrid()[i][c].getEffect()==null){
-				getGrid()[i][c].setEffect(Cell.CellEffect.GOLDEN);
+			if(grid[i][c].getEffect()==null){
+				grid[i][c].setEffect(Cell.CellEffect.GOLDEN);
 				newGoldenCells += 1;
 			}
 		}
