@@ -26,19 +26,6 @@ public abstract class GameState {
 	public abstract boolean playerWon();
 
 	@Override
-	public String toString(){
-
-		String message = String.format("Score: %d", getScore());
-
-		if(gameOver()){
-			if (playerWon()) {
-				message = message + "\nFinished - Player Won!";
-			}else{
-				message = message + "\nFinished - Loser !";
-			}
-		}
-
-		return message;
-	};
+	public String toString(){ return String.format("Score: %d", getScore()); };
 
 }

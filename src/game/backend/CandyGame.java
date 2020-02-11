@@ -27,7 +27,10 @@ public class CandyGame implements GameListener {
 		// Add a GameListener that adds score on explosions
 		addGameListener(this);
 	}
-	
+
+
+	// Grid accessors
+
 	public int getSize() {
 		return Grid.SIZE;
 	}
@@ -43,19 +46,27 @@ public class CandyGame implements GameListener {
 	public void addGameListener(GameListener listener) {
 		grid.addListener(listener);
 	}
-	
+
+
+	// State accessors
+
 	@Override
-	public String toString(){
-		return state.toString();
-	}
+	public String toString(){ return state.toString(); }
+
+	public boolean gameOver(){ return state.gameOver(); }
+
+	public boolean playerWon(){ return state.playerWon(); }
+
+
+	// GameListener Overrides
 	
 	@Override
 	public void cellExplosion(Element e) {
 		state.addScore(e.getScore());
 	}
 	
-	@Override public void gridUpdated() { }
+	@Override public void gridUpdated(){}
 
-	@Override public void onValidMove(){ }
+	@Override public void onValidMove(){}
 
 }

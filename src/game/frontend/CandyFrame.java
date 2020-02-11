@@ -9,6 +9,7 @@ import game.backend.element.Element;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.geometry.Point2D;
+import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
@@ -22,10 +23,15 @@ public class CandyFrame extends VBox {
 	private ScorePanel scorePanel;
 	private ImageManager images;
 	private Point2D lastPoint;
+
+	private GameApp app;
 	private CandyGame game;
 
-	public CandyFrame(CandyGame game) {
+	private boolean dialogShown = false;
 
+	public CandyFrame(GameApp app, CandyGame game) {
+
+		this.app = app;
 		this.game = game;
 
 		// Build app menu
@@ -50,6 +56,16 @@ public class CandyFrame extends VBox {
 			// Re-renders the grid
 			@Override
 			public void gridUpdated() {
+
+				if(!dialogShown && game().gameOver()){
+					if(game().playerWon()){
+						showWonDialog();
+					}else{
+						showLostDialog();
+					}
+					dialogShown = true;
+				}
+
 				Timeline timeLine = new Timeline();
 				Duration frameGap = Duration.millis(100);
 				Duration frameTime = Duration.ZERO;
@@ -112,6 +128,22 @@ public class CandyFrame extends VBox {
 		double i = x / CELL_SIZE;
 		double j = y / CELL_SIZE;
 		return (i >= 0 && i < game.getSize() && j >= 0 && j < game.getSize()) ? new Point2D(j, i) : null;
+	}
+
+	private void showWonDialog(){
+		Alert alert = new Alert(Alert.AlertType.INFORMATION);
+		alert.setTitle("Congratulations");
+		alert.setContentText("You won!");
+		alert.showAndWait();
+		app.setScene(GameApp.AppScene.MENU);
+	}
+
+	private void showLostDialog(){
+		Alert alert = new Alert(Alert.AlertType.INFORMATION);
+		alert.setTitle("Oh no");
+		alert.setHeaderText("You lost!");
+		alert.showAndWait();
+		app.setScene(GameApp.AppScene.MENU);
 	}
 
 }

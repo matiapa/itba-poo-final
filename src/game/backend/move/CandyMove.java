@@ -20,7 +20,6 @@ public class CandyMove extends Move {
 	// Checks if a figure appears on any of the points
 	@Override
 	public boolean internalValidation() {
-		System.out.println(String.format("CandyMove %d,%d - %d,%d",i1,j1,i2,j2));
 		this.detector = new FigureDetector(grid);
 		f1 = detector.checkFigure(i1, j1);
 		f2 = detector.checkFigure(i2, j2);

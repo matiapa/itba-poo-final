@@ -19,9 +19,15 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-import java.util.logging.Level;
+import java.util.HashMap;
+import java.util.Map;
 
 public class GameApp extends Application {
+
+	private Stage stage;
+
+	enum AppScene{ MENU, GAME_FRAME }
+	Map<AppScene, Scene> scenes = new HashMap();
 
 	public static void main(String[] args) {
 		launch(args);
@@ -30,6 +36,19 @@ public class GameApp extends Application {
 	@Override
 	public void start(Stage stage) {
 
+		this.stage = stage;
+
+		// Main menu generation
+		scenes.put(AppScene.MENU, createMainMenu());
+		setScene(AppScene.MENU);
+
+		stage.setResizable(true);
+		stage.show();
+
+	}
+
+
+	private Scene createMainMenu(){
 		Label title = new Label("Candy Crush");
 		title.setFont(new Font("Arial", 24));
 
@@ -38,7 +57,7 @@ public class GameApp extends Application {
 		Button playButton = new Button("Play");
 		playButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override public void handle(ActionEvent e) {
-				playLevel(stage, levelChoice.getValue());
+				playLevel(levelChoice.getValue());
 			}
 		});
 
@@ -56,12 +75,11 @@ public class GameApp extends Application {
 				levelChooser
 		);
 
-		stage.setScene(new Scene(stackScreen));
-		stage.show();
-
+		return new Scene(stackScreen);
 	}
 
-	private void playLevel(Stage stage, String levelName){
+
+	private void playLevel(String levelName){
 
 		Class levelClass;
 		switch(levelName){
@@ -82,17 +100,17 @@ public class GameApp extends Application {
 				break;
 		}
 
-		// Creation of game. Backend.
+		// Creation of game backend.
 		CandyGame game = new CandyGame(levelClass);
 
-		// UI Generation
-		CandyFrame frame = new CandyFrame(game);
-		Scene scene = new Scene(frame);
-
-		// Put on stage
-		stage.setResizable(true);
-		stage.setScene(scene);
+		// Game frame generation
+		scenes.put(AppScene.GAME_FRAME, new Scene(new CandyFrame(this, game)));
+		setScene(AppScene.GAME_FRAME);
 
 	}
+
+	public void setScene(AppScene sceneName){ stage.setScene(scenes.get(sceneName)); }
+
+
 
 }
