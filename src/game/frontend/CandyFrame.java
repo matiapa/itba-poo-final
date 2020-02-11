@@ -77,7 +77,7 @@ public class CandyFrame extends VBox {
 						Element element = cell.getContent();
 
 						Image image = images.getImage(element);
-						BoardPanel.CellEffect effect = cell.getEffect();
+						Cell.CellEffect effect = cell.getEffect();
 						String overlayText = (cell.getContent() instanceof BombCandy) ? ""+((BombCandy) cell.getContent()).getRemainingMoves() : null;
 
 						// Adds to timeline a call to boardPanel.setImage with new image

@@ -3,6 +3,7 @@ package game.backend.level;
 import game.backend.GameState;
 import game.backend.Grid;
 import game.backend.cell.CandyGeneratorCell;
+import game.backend.cell.Cell;
 import game.frontend.BoardPanel;
 
 public class Level2 extends Grid {
@@ -39,11 +40,11 @@ public class Level2 extends Grid {
 
 		for(int i=0; i<SIZE; i++){
 			if(g()[r][i].getEffect()==null){
-				g()[r][i].setEffect(BoardPanel.CellEffect.GOLDEN);
+				g()[r][i].setEffect(Cell.CellEffect.GOLDEN);
 				newGoldenCells += 1;
 			}
 			if(g()[i][c].getEffect()==null){
-				g()[i][c].setEffect(BoardPanel.CellEffect.GOLDEN);
+				g()[i][c].setEffect(Cell.CellEffect.GOLDEN);
 				newGoldenCells += 1;
 			}
 		}

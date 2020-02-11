@@ -13,7 +13,7 @@ public class Cell {
 	private Cell[] around = new Cell[Direction.values().length];
 	private Element content;
 
-	private BoardPanel.CellEffect effect;
+	private CellEffect effect;
 
 	public Cell(Grid grid) {
 		this.grid = grid;
@@ -97,8 +97,10 @@ public class Cell {
 	}
 
 
-	public BoardPanel.CellEffect getEffect(){ return effect; }
+	public CellEffect getEffect(){ return effect; }
 
-	public void setEffect(BoardPanel.CellEffect effect){ this.effect=effect; }
+	public void setEffect(CellEffect effect){ this.effect=effect; }
+
+	public enum CellEffect{ GOLDEN }
 
 }

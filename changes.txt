@@ -57,3 +57,7 @@ Se creo en GameApp un metodo publico setScene(APP_SCENES scene) que pone en stag
 Se creo en CandyGame metodos playerWon() y gameOver() que dan el resultado del estado del juego
 Se agrego a CandyFrame la propiedad GameApp
 Se agrego a CandyFrame metodos para mostrar dialogos de victoria y derrota
+
+----------------------------
+
+Se movio el enum CellEffect a Cell, y se movio la responsabilidad de generar el efecto a un switch en BoardPanel

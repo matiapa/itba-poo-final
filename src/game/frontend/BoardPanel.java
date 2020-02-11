@@ -1,5 +1,6 @@
 package game.frontend;
 
+import game.backend.cell.Cell;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.Effect;
 import javafx.scene.effect.Light;
@@ -38,14 +39,14 @@ public class BoardPanel extends TilePane {
 
 
 	// Updates the image of the ImageView
-	public void setImage(int row, int column, Image image, CellEffect cellEffect, String overlayText) {
+	public void setImage(int row, int column, Image image, Cell.CellEffect cellEffectName, String overlayText) {
 
 		// Create the image
 		ImageView imageView = new ImageView(image);
 
 		// Set effect if necessary
-		if(cellEffect!=null){
-			cells[row][column].setEffect(cellEffect.effect);
+		if(cellEffectName!=null){
+			cells[row][column].setEffect(getEffect(cellEffectName));
 		}
 
 		// Add it to the pane
@@ -75,24 +76,16 @@ public class BoardPanel extends TilePane {
 
 	}
 
-
-	public enum CellEffect{
-
-		GOLDEN(createGoldenEffect());
-
-		static Effect createGoldenEffect(){
-			Light.Distant spotLight = new Light.Distant();
-			spotLight.setColor(Color.YELLOW);
-			spotLight.setElevation(100);
-			return new Lighting(spotLight);
+	private Effect getEffect(Cell.CellEffect effectName){
+		switch(effectName){
+			case GOLDEN:
+				Light.Distant spotLight = new Light.Distant();
+				spotLight.setColor(Color.YELLOW);
+				spotLight.setElevation(100);
+				return new Lighting(spotLight);
+			default:
+				return null;
 		}
-
-		private Effect effect;
-
-		CellEffect(Effect effect){
-			this.effect = effect;
-		}
-
 	}
 
 }
