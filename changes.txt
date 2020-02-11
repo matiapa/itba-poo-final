@@ -1,9 +1,9 @@
----------------
+---------------------------------------------------------------------------------------------------------
 
 Se hizo que la Stage sea resizable ya que no entraba el ScorePanel
 Se agregaron comentarios
 
---------------
+---------------------------------------------------------------------------------------------------------
 
 Se agrego la propiedad goldenCells al Level1State
 Se creo el metodo toString para GameState, y se movio a este la logica de de creacion del mensaje para ScoreBoard
@@ -16,7 +16,7 @@ Se agrego la verificacion de celdas doradas en tryMove de Level1
 Se agrego el metodo setGoldenCross en Level1
 Se agrego el metodo addGoldenCells en Level1State
 
----------------
+---------------------------------------------------------------------------------------------------------
 
 Se agrego un menu de eleccion de nivel antes de iniciar el juego
 
@@ -29,7 +29,7 @@ Se creo la clase GeneratorCell y BombCandyGeneratorCell
 
 Se agrego el parametro overlayText a setImage en BoardPanel
 
--------------------------
+---------------------------------------------------------------------------------------------------------
 
 Se cambio a protected la visibilidad de Grid en Cell
 Se agrego a Element el parametro Grid, y constructores con y sin el
@@ -37,18 +37,18 @@ Se agregaron constructores a Candy con y sin parametro Grid
 Se creo una clase SpecialCandyGenerator
 Se cambio la clase BombCandyGeneratorCell para que extienda de ella
 
------------------------
+---------------------------------------------------------------------------------------------------------
 
 Se actualizo la logica de Level3 para que funcione con las llamadas a metodos de grid desde BombCandy
 
--------------------------
+---------------------------------------------------------------------------------------------------------
 
 Se cambiaron los nombres de los niveles
 Se cambio el menu de niveles para que los muestre todos
 Se arreglo la logica de distribucion de SpecialCandyGeneratorCell
 Se cambio la cantidad de caramelos que se asigna a GeneratorCell en Level3
 
---------------------------
+---------------------------------------------------------------------------------------------------------
 
 Se creo en GameApp un enum APP_SCENES y un mapa de APP_SCENES a Scene
 Se creo en GameApp un metodo publico setScene(APP_SCENES scene) que pone en stage una Scene
@@ -57,12 +57,19 @@ Se creo en CandyGame metodos playerWon() y gameOver() que dan el resultado del e
 Se agrego a CandyFrame la propiedad GameApp
 Se agrego a CandyFrame metodos para mostrar dialogos de victoria y derrota
 
-----------------------------
+---------------------------------------------------------------------------------------------------------
 
 Se movio el enum CellEffect a Cell, y se movio la responsabilidad de generar el efecto a un switch en BoardPanel
 
----------------------------------
+---------------------------------------------------------------------------------------------------------
 
 Se agrego el Timer a Level4
-Se agrego el metodo scorePanelUpdated() a GameListener
+Se agrego el metodo scorePanelUpdated() a GameListen
 Se implemento el metodo scorePanelUpdated() en CandyFrame
+
+---------------------------------------------------------------------------------------------------------
+
+Se corrigio una llamada erronea a timeProviderConsumed()
+Se agrego el parametro gridLoaded a Grid, y se lo utilizo en los metodos exploded() de BombCandy y TimeBonusCandy
+
+---------------------------------------------------------------------------------------------------------

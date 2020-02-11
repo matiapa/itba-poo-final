@@ -2,7 +2,7 @@ package game.backend.level;
 
 import game.backend.GameState;
 import game.backend.Grid;
-import game.backend.cell.TimeProviderCandyGeneratorCell;
+import game.backend.cell.TimeBonusCandyGeneratorCell;
 import javafx.application.Platform;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -22,7 +22,7 @@ public class Level4 extends Grid {
 
     @Override
     protected void fillCells() {
-        genCell = new TimeProviderCandyGeneratorCell(this, TIME_BONUS_AMOUNT, TIME_BONUS_FREQUENCY);
+        genCell = new TimeBonusCandyGeneratorCell(this, TIME_BONUS_AMOUNT, TIME_BONUS_FREQUENCY);
         super.fillCells();
     }
 
@@ -93,6 +93,5 @@ public class Level4 extends Grid {
             return String.format("%s \nRemaining time: %d", super.toString(), timeCount);
         }
     }
-
 
 }
