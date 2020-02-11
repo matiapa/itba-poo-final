@@ -10,8 +10,8 @@ public class TwoBombMove extends Move {
 	
 	@Override
 	public void removeElements() {
-		for(int i = 0; i < Grid.SIZE; i++) {
-			for(int j = 0; j < Grid.SIZE; j++) {
+		for(int i = 0; i < Grid.getSize(); i++) {
+			for(int j = 0; j < Grid.getSize(); j++) {
 				clearContent(i,j);
 			}
 		}

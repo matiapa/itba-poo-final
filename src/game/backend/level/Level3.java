@@ -3,7 +3,6 @@ package game.backend.level;
 import game.backend.GameState;
 import game.backend.Grid;
 import game.backend.cell.BombCandyGeneratorCell;
-import game.backend.element.BombCandy;
 
 public class Level3 extends Grid {
 
@@ -11,18 +10,17 @@ public class Level3 extends Grid {
 	private static int NUMBER_OF_BOMBS = 15;
 	private static double BOMB_FREQUENCY = 0.1;
 
-	public static int getInitialMoves(){ return BOMB_INITIAL_MOVES; }
-
 
 	public Level3(){
-		super(new Level3State());
+		super();
+		initialize(new Level3State());
 	}
 
 
 	@Override
 	protected void fillCells() {
 		// An equal amount of bombs to place is assigned to each genCell
-		genCell = new BombCandyGeneratorCell(this, NUMBER_OF_BOMBS, BOMB_FREQUENCY);
+		setGenCell(new BombCandyGeneratorCell(this, NUMBER_OF_BOMBS, BOMB_FREQUENCY));
 		super.fillCells();
 	}
 
@@ -31,27 +29,27 @@ public class Level3 extends Grid {
 	public boolean tryMove(int i1, int j1, int i2, int j2) {
 		boolean ret;
 		if (ret = super.tryMove(i1, j1, i2, j2)) {
-			state().addMove();
-			//updateBombCandies();//TODO dejaste esto asa
-			wasUpdated();
+			getState().addMove();
+			gridUpdated();
 		}
 		return ret;
 	}
 
 
-	public void informBombRemainingMoves(int newRemainingMovements){ ((Level3State) state()).informBombRemainingMoves(newRemainingMovements); }
+	public void informBombRemainingMoves(int newRemainingMovements){ ((Level3State) getState()).informBombRemainingMoves(newRemainingMovements); }
 
-	public void bombDeactivated(){ ((Level3State) state()).bombDeactivated();
-		System.out.println("DEACTIVATED");
-	}
+	public void bombDeactivated(){ ((Level3State) getState()).bombDeactivated(); }
 
-	public void bombExploded(){ ((Level3State) state()).bombExploded(); }
+	public void bombExploded(){ ((Level3State) getState()).bombExploded(); }
+
+
+	public static int getBombInitialMoves(){ return BOMB_INITIAL_MOVES; }
 
 
 	// -------------------------------------------------------- GAME STATE --------------------------------------------------------
 
 
-	static private class Level3State extends GameState {
+	private class Level3State extends GameState {
 
 		private int remainingMovements = BOMB_INITIAL_MOVES;
 		private long bombsDeactivated=0;

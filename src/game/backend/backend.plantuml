@@ -5,37 +5,66 @@
 'CandyGame'
 
 class CandyGame{
+ - grid: Grid
 
+ + getSize(): int
+ + tryMove(int,int,int,int): bool
+ + get(int,int): Cell
+ + addGameListener(GameListener): void
+
+ + gameOver(): bool
+ + playerWon(): bool
+ + toString(): String
+
+ + cellExplosion(Element): void
 }
+
+CandyGame *-- Grid
 
 GameListener <-- CandyGame
 
 
-' Grid'
+' Grid '
 
 abstract class Grid{
- - g: Cell[][]
+ - {static} SIZE: int
+ - grid: Cell[][]
  - gMap: Map<Cell, Point>
+
  - state: GameState
  - listeners: List<GameListener>
  - moveMaker: MoveMaker
  - figureDetector: FigureDetector
- - generatorCell: GeneratorCell
 
+ - genCell: GeneratorCell
+ - gridLoadReady: bool
+
+ # initialize(GameState): void
  # fillCells(): void
  - fallElements(): bool
 
+ + tryMove(int,int,int,int): bool
+ - swapContent(int,int,int,int): void
  + tryRemove(Cell): Figure
  - removeFigure(int, int, Figure): void
 
- + get(int,int): Element
+ + addListener(GameListener): void
+ + gridUpdated(): void
+ + cellExploded(Element): void
+ + validMoveMade(): void
+ + scorePanelUpdated(): void
+
  + getCell(int,int): Cell
+ + get(int,int): Element
  + clearContent(int,int): void
  + setContent(int,int): void
 
- + addListener(GameListener): void
- + wasUpdated(): void
- + cellExplosion(Element): void
+ + {static} getSize(): int
+ + getGridLoadReady(): bool
+ # getGrid(): Cell[][]
+ # setGenCell(GeneratorCell): void
+ # getState(): GameState
+
 }
 
 Grid *-- Cell
@@ -61,14 +90,14 @@ abstract class GameState{
  + toString(): String
 }
 
-Grid *-- GameState
-
 
 ' GameListener '
 
 interface GameListener{
  + gridUpdated(): void
  + cellExplosion(): void
+ + onValidMove(): void
+ + scorePanelUpdated(): void
 }
 
 
@@ -77,20 +106,29 @@ interface GameListener{
 ' Cell '
 
 class Cell{
+ - grid: Grid
  - around: Cell[]
  - content: Element
  - effect: CellEffect
- + isMovable(): bool
- + isEmpty(): bool
- + hasFloor(): bool
+
+ + setAround(): bool
+ - hasFloor(): bool
+
+ - explode(Direction): void
+ - expandExplosion(Direction[]): void
 
  + setContent(Element): void
  + clearContent(): void
  + getContent(): Element
- + getAndClearContent(): Element
  + fallUpperContent(): bool
- - explode(Direction): void
- - expandExplosion(Direction[]): void
+ + isEmpty(): bool
+ - isMovable(): bool
+ - getAndClearContent(): Element
+
+ + getEffect(): CellEffect
+ # setEffect(CellEffect): void
+
+ # getGrid(): Grid
 }
 
 Cell *-- Element
@@ -102,7 +140,6 @@ Cell *-- CellEffect
 enum CellEffect{
  GOLDEN
 }
-
 
 
 ' GeneratorCell '
@@ -130,7 +167,7 @@ class CandyGeneratorCell {
 GeneratorCell <-- CandyGeneratorCell
 
 
-' SpecialGeneratorCell '
+' SpecialCandyGeneratorCell '
 
 abstract class SpecialCandyGeneratorCell{
  - specialCandy: Class<Candy>
@@ -166,6 +203,7 @@ SpecialCandyGeneratorCell <-- TimeProviderCandyGeneratorCell
 ' Element '
 
 abstract class Element{
+ - grid: Grid
  + {abstract} isMovable(): bool
  + {abstract} getKey(): String
  + {abstract} getScore(): int
@@ -303,68 +341,5 @@ class Move{
 }
 
 ' IRR ' Move *-- Grid
-
-
-' --------------- LEVELS --------------- '
-
-' Level2 '
-
-class Level2{
- - MAX_MOVES: int
- # fillCells(): void
- + tryMove(): bool
- - setGoldenCross(): void
-}
-
-Grid <-- Level2
-Level2 *-- Level2State
-
-
-' Level2State '
-
-class Level2State{
- - long maxMoves
- - long goldenCells
- + gameOver(): bool
- + playerWon(): bool
- + toString(): String
- - addGoldenCells(): void
-}
-
-GameState <-- Level2State
-
-
-' Level3 '
-
-class Level3 {
-  - BOMB_FREQUENCY : double
-  - BOMB_INITIAL_MOVES : int
-  - NUMBER_OF_BOMBS : int
-  + tryMove(): bool
-  # fillCells(): void
-  - updateBombCandies(): void
-}
-
-Grid <-- Level3
-Level3 *-- Level3State
-
-
-' Level3State'
-
-class Level3State {
-  - bombExploded : boolean
-  - bombsOnGrid : int
-  - bombsToPlace : long
-  - remainingMovements : int
-  + gameOver(): bool
-  + playerWon(): bool
-  + setBombsOnGrid(int): void
-  + toString(): String
-  - bombExploded(): void
-  - bombPlaced(): void
-  - setRemainingMovements(int): void
-}
-
-GameState <-- Level3State
 
 @enduml

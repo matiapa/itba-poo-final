@@ -1,0 +1,99 @@
+@startuml
+
+' --------------- LEVELS --------------- '
+
+' Level2 '
+
+class Level2{
+ - MAX_MOVES: int
+ # fillCells(): void
+ + tryMove(): bool
+ - setGoldenCross(): void
+}
+
+Grid <-- Level2
+Level2 *-- Level2State
+
+
+' Level2State '
+
+class Level2State{
+ - long maxMoves
+ - long goldenCells
+ + gameOver(): bool
+ + playerWon(): bool
+ + toString(): String
+ - addGoldenCells(): void
+}
+
+GameState <-- Level2State
+
+
+' Level3 '
+
+class Level3 {
+  - BOMB_FREQUENCY : double
+  - BOMB_INITIAL_MOVES : int
+  - NUMBER_OF_BOMBS : int
+  + tryMove(): bool
+  # fillCells(): void
+  + informBombRemainingMoves(int): void
+  + bombDeactivated(): void
+  + bombExploded(): void
+  + getBombInitialMoves(): int
+}
+
+Grid <-- Level3
+Level3 *-- Level3State
+
+
+' Level3State'
+
+class Level3State {
+  - bombExploded : boolean
+  - bombsDeactivated : int
+  - remainingMovements : int
+  + gameOver(): bool
+  + playerWon(): bool
+  + toString(): String
+  - informBombRemainingMoves(int): void
+  - bombDeactivated(): void
+  - bombExploded(): void
+}
+
+GameState <-- Level3State
+
+
+' Level4 '
+
+class Level4{
+ - INITIAL_TIME: int
+ - TIME_BONUS_ADDITIONAL_TIME: int
+ - TIME_BONUS_AMOUNT: int
+ - TIME_BONUS_FREQUENCY: double
+ # fillCells(): void
+ + tryMove(): bool
+ + getAdditionalTime(): int
+ + timeBonusConsumed(): void
+}
+
+Grid <-- Level4
+Level4 *-- Level4State
+
+
+' Level4State '
+
+class Level4State{
+ - timeBonusConsumed: int
+ - timesUp: bool
+ - timeCount: int
+ + gameOver(): bool
+ + playerWon(): bool
+ + toString(): String
+ - timesUp(): void
+ - timeProviderConsumed(): void
+}
+
+GameState <-- Level4State
+
+@enduml

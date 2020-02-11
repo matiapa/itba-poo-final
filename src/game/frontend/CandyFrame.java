@@ -47,8 +47,6 @@ public class CandyFrame extends VBox {
 		scorePanel = new ScorePanel();
 		getChildren().add(scorePanel);
 
-		// Start the game
-		game.initGame();
 
 		// Add a GameListener that re-renders the grid on gridUpdated
 		GameListener listener;

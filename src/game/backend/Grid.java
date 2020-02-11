@@ -16,26 +16,20 @@ import java.util.List;
 import java.util.Map;
 
 public abstract class Grid {
-	
-	public static final int SIZE = 9;
 
-	private Cell[][] g = new Cell[SIZE][SIZE];
-	protected Cell[][] g() { return g; }
-
+	private static final int SIZE = 9;
+	private Cell[][] grid = new Cell[SIZE][SIZE];
 	private Map<Cell, Point> gMap = new HashMap<>();
 
 	private GameState state;
-	protected GameState state(){ return state; }
-
 	private List<GameListener> listeners = new ArrayList<>();
-
 	private MoveMaker moveMaker;
 	private FigureDetector figureDetector;
 
-	protected GeneratorCell genCell;
-	public boolean gridLoadReady;
+	private GeneratorCell genCell;
+	private boolean gridLoadReady;
 
-	// -------------------------------------------------------- CONSTRUCTION --------------------------------------------------------
+	// -------------------------------------------------------- INITIALIZATION --------------------------------------------------------
 
 	public Grid(){
 
@@ -43,25 +37,21 @@ public abstract class Grid {
 		figureDetector = new FigureDetector(this);
 
 		// Creates an array of Cells and a map of Cells->Points
-		for (int i = 0; i < SIZE; i++) {
-			for (int j = 0; j < SIZE; j++) {
-				g[i][j] = new Cell(this);
-				gMap.put(g[i][j], new Point(i,j));
+		for (int i = 0; i < getSize(); i++) {
+			for (int j = 0; j < getSize(); j++) {
+				grid[i][j] = new Cell(this);
+				gMap.put(grid[i][j], new Point(i,j));
 			}
 		}
 
 	}
 
-	public void initialize(GameState state){
+
+	protected void initialize(GameState state){
 		this.state = state;
 		fillCells();
 		fallElements();
 		gridLoadReady = true;
-	}
-
-	public Grid(GameState state){
-		this();
-		initialize(state);
 	}
 
 
@@ -74,48 +64,48 @@ public abstract class Grid {
 		// Fills the grid
 
 		// Corners
-		g()[0][0].setAround(genCell, g()[1][0], wallCell, g()[0][1]);
-		g()[0][SIZE-1].setAround(genCell, g()[1][SIZE-1], g()[0][SIZE-2], wallCell);
-		g()[SIZE-1][0].setAround(g()[SIZE-2][0], wallCell, wallCell, g()[SIZE-1][1]);
-		g()[SIZE-1][SIZE-1].setAround(g()[SIZE-2][SIZE-1], wallCell, g()[SIZE-1][SIZE-2], wallCell);
+		getGrid()[0][0].setAround(genCell, getGrid()[1][0], wallCell, getGrid()[0][1]);
+		getGrid()[0][getSize()-1].setAround(genCell, getGrid()[1][getSize()-1], getGrid()[0][getSize()-2], wallCell);
+		getGrid()[getSize()-1][0].setAround(getGrid()[getSize()-2][0], wallCell, wallCell, getGrid()[getSize()-1][1]);
+		getGrid()[getSize()-1][getSize()-1].setAround(getGrid()[getSize()-2][getSize()-1], wallCell, getGrid()[getSize()-1][getSize()-2], wallCell);
 
 		// Upper line
-		for (int j = 1; j < SIZE-1; j++) {
-			g()[0][j].setAround(genCell, g()[1][j], g()[0][j-1], g()[0][j+1]);
+		for (int j = 1; j < getSize()-1; j++) {
+			getGrid()[0][j].setAround(genCell, getGrid()[1][j], getGrid()[0][j-1], getGrid()[0][j+1]);
 		}
 
 		// Bottom line
-		for (int j = 1; j < SIZE-1; j++) {
-			g()[SIZE-1][j].setAround(g()[SIZE-2][j], wallCell, g()[SIZE-1][j-1],g()[SIZE-1][j+1]);
+		for (int j = 1; j < getSize()-1; j++) {
+			getGrid()[getSize()-1][j].setAround(getGrid()[getSize()-2][j], wallCell, getGrid()[getSize()-1][j-1], getGrid()[getSize()-1][j+1]);
 		}
 
 		// Left line
-		for (int i = 1; i < SIZE-1; i++) {
-			g()[i][0].setAround(g()[i-1][0],g()[i+1][0], wallCell ,g()[i][1]);
+		for (int i = 1; i < getSize()-1; i++) {
+			getGrid()[i][0].setAround(getGrid()[i-1][0], getGrid()[i+1][0], wallCell , getGrid()[i][1]);
 		}
 
 		// Right line
-		for (int i = 1; i < SIZE-1; i++) {
-			g()[i][SIZE-1].setAround(g()[i-1][SIZE-1],g()[i+1][SIZE-1], g()[i][SIZE-2], wallCell);
+		for (int i = 1; i < getSize()-1; i++) {
+			getGrid()[i][getSize()-1].setAround(getGrid()[i-1][getSize()-1], getGrid()[i+1][getSize()-1], getGrid()[i][getSize()-2], wallCell);
 		}
 
 		// Central cells
-		for (int i = 1; i < SIZE-1; i++) {
-			for (int j = 1; j < SIZE-1; j++) {
-				g()[i][j].setAround(g()[i-1][j],g()[i+1][j],g()[i][j-1],g()[i][j+1]);
+		for (int i = 1; i < getSize()-1; i++) {
+			for (int j = 1; j < getSize()-1; j++) {
+				getGrid()[i][j].setAround(getGrid()[i-1][j], getGrid()[i+1][j], getGrid()[i][j-1], getGrid()[i][j+1]);
 			}
 		}
 	};
 
 
 	private void fallElements() {
-		int i = SIZE - 1;
+		int i = getSize() - 1;
 		while (i >= 0) {
 			int j = 0;
-			while (j < SIZE) {
-				if (g[i][j].isEmpty()) {
-					if (g[i][j].fallUpperContent()) {
-						i = SIZE;
+			while (j < getSize()) {
+				if (grid[i][j].isEmpty()) {
+					if (grid[i][j].fallUpperContent()) {
+						i = getSize();
 						j = -1;
 						break;
 					}
@@ -127,7 +117,7 @@ public abstract class Grid {
 	}
 
 
-	// -------------------------------------------------------- Try movement  --------------------------------------------------------
+	// -------------------------------------------------------- MOVEMENT  --------------------------------------------------------
 
 
 	// Checks if movement is valid, if so, removes elements of the move and makes the other elements fall
@@ -150,15 +140,12 @@ public abstract class Grid {
 	}
 
 
-	public void swapContent(int i1, int j1, int i2, int j2) {
-		Element e = g[i1][j1].getContent();
-		g[i1][j1].setContent(g[i2][j2].getContent());
-		g[i2][j2].setContent(e);
-		wasUpdated();
+	private void swapContent(int i1, int j1, int i2, int j2) {
+		Element e = grid[i1][j1].getContent();
+		grid[i1][j1].setContent(grid[i2][j2].getContent());
+		grid[i2][j2].setContent(e);
+		gridUpdated();
 	}
-
-
-	// -------------------------------------------------------- Removing --------------------------------------------------------
 
 
 	public Figure tryRemove(Cell cell) {
@@ -187,35 +174,14 @@ public abstract class Grid {
 	}
 
 
-	// ------------------------------------------------------------------------------------------------------------------
-
-
-	public Element get(int i, int j) {
-		return g[i][j].getContent();
-	}
-
-
-	public Cell getCell(int i, int j) {
-		return g[i][j];
-	}
-
-	
-	public void clearContent(int i, int j) {
-		g[i][j].clearContent();
-	}
-
-
-	public void setContent(int i, int j, Element e) {
-		g[i][j].setContent(e);
-	}
+	// -------------------------------------------------- LISTENERS --------------------------------------------------------
 
 
 	public void addListener(GameListener listener) {
 		listeners.add(listener);
 	}
 
-
-	public void wasUpdated(){
+	public void gridUpdated(){
 		if (listeners.size() > 0) {
 			for (GameListener gl: listeners) {
 				gl.gridUpdated();
@@ -223,7 +189,7 @@ public abstract class Grid {
 		}
 	}
 	
-	public void cellExplosion(Element e) {
+	public void cellExploded(Element e) {
 		for (GameListener gl: listeners) {
 			gl.cellExplosion(e);
 		}
@@ -242,5 +208,39 @@ public abstract class Grid {
 			}
 		}
 	}
+
+
+	// ------------------------------------------------ CELL ACCESSORS --------------------------------------------------------
+
+
+	public Cell getCell(int i, int j) {
+		return grid[i][j];
+	}
+
+
+	public Element get(int i, int j) {
+		return grid[i][j].getContent();
+	}
+
+
+	public void clearContent(int i, int j) {
+		grid[i][j].clearContent();
+	}
+
+
+	public void setContent(int i, int j, Element e) {
+		grid[i][j].setContent(e);
+	}
+
+
+	// ------------------------------------------------ PROPERTY ACCESSORS --------------------------------------------------------
+
+
+	public static int getSize() { return SIZE; }
+	public boolean getGridLoadReady(){ return gridLoadReady; }
+
+	protected Cell[][] getGrid() { return grid; }
+	protected void setGenCell(GeneratorCell genCell) { this.genCell = genCell; }
+	protected GameState getState(){ return state; }
 
 }

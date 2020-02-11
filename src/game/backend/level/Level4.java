@@ -11,7 +11,6 @@ public class Level4 extends Grid {
 
     private static int INITIAL_TIME = 60;
     private static int TIME_BONUS_ADDITIONAL_TIME = 10;
-
     private static int TIME_BONUS_AMOUNT = 20;
     private static double TIME_BONUS_FREQUENCY = 0.1;
 
@@ -22,7 +21,7 @@ public class Level4 extends Grid {
 
     @Override
     protected void fillCells() {
-        genCell = new TimeBonusCandyGeneratorCell(this, TIME_BONUS_AMOUNT, TIME_BONUS_FREQUENCY);
+        setGenCell(new TimeBonusCandyGeneratorCell(this, TIME_BONUS_AMOUNT, TIME_BONUS_FREQUENCY));
         super.fillCells();
     }
 
@@ -30,23 +29,23 @@ public class Level4 extends Grid {
     public boolean tryMove(int i1, int j1, int i2, int j2) {
         boolean ret;
         if (ret = super.tryMove(i1, j1, i2, j2)) {
-            state().addMove();
-            wasUpdated();
+            getState().addMove();
+            gridUpdated();
         }
         return ret;
     }
 
     public static int getAdditionalTime() { return TIME_BONUS_ADDITIONAL_TIME; }
 
-    public void timeProviderConsumed() {
-        ((Level4State) state()).timeProviderConsumed();
+    public void timeBonusConsumed() {
+        ((Level4State) getState()).timeProviderConsumed();
     }
 
 // -------------------------------------------------------- GAME STATE --------------------------------------------------------
 
     private class Level4State extends GameState {
 
-        private int timeProviderConsumed = 0;
+        private int timeBonusConsumed = 0;
         private boolean timesUp = false;
         private int timeCount = Level4.INITIAL_TIME;
 
@@ -75,8 +74,14 @@ public class Level4 extends Grid {
         }
 
         public boolean playerWon() {
-            return timeProviderConsumed == TIME_BONUS_AMOUNT && timeCount != 0;
+            return timeBonusConsumed == TIME_BONUS_AMOUNT && timeCount != 0;
         }
+
+        @Override
+        public String toString() {
+            return String.format("%s \nRemaining time: %d", super.toString(), timeCount);
+        }
+
 
         private void timesUp() {
             timesUp = true;
@@ -88,10 +93,7 @@ public class Level4 extends Grid {
             //timeCount += TIME_BONUS_ADDITIONAL_TIME;
         }
 
-        @Override
-        public String toString() {
-            return String.format("%s \nRemaining time: %d", super.toString(), timeCount);
-        }
+
     }
 
 }

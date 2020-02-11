@@ -31,8 +31,8 @@ public class TimeBonusCandy extends Candy {
     @Override
     public Direction[] explode() {
         // This is to avoid the figures that get formed during grid loading
-        if(grid.gridLoadReady){
-            ((Level4) grid).timeProviderConsumed();
+        if(grid.getGridLoadReady()){
+            ((Level4) grid).timeBonusConsumed();
         }
         return super.explode();
     }

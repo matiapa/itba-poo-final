@@ -7,7 +7,7 @@ import game.backend.move.Direction;
 
 public class BombCandy extends Candy {
 
-    private int remainingMoves = Level3.getInitialMoves();
+    private int remainingMoves = Level3.getBombInitialMoves();
 
     public BombCandy(Grid grid, CandyColor color) {
         super(grid, color);
@@ -40,7 +40,7 @@ public class BombCandy extends Candy {
     @Override
     public Direction[] explode() {
         // This is to avoid the figures that get formed during grid loading
-        if(grid.gridLoadReady) {
+        if(grid.getGridLoadReady()) {
             ((Level3) grid).bombDeactivated();
         }
         return super.explode();

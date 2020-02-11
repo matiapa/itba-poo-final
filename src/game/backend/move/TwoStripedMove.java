@@ -10,10 +10,10 @@ public class TwoStripedMove extends Move {
 	
 	@Override
 	public void removeElements() {
-		for(int i = 0; i < Grid.SIZE; i++) {
+		for(int i = 0; i < Grid.getSize(); i++) {
 			clearContent(i, j2);
 		}
-		for(int j = 0; j < Grid.SIZE; j++) {
+		for(int j = 0; j < Grid.getSize(); j++) {
 			clearContent(i2, j);
 		}
 	}

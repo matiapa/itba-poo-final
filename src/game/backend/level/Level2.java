@@ -4,22 +4,21 @@ import game.backend.GameState;
 import game.backend.Grid;
 import game.backend.cell.CandyGeneratorCell;
 import game.backend.cell.Cell;
-import game.frontend.BoardPanel;
 
 public class Level2 extends Grid {
-
 	
 	private static int MAX_MOVES = 20;
 
 
 	public Level2(){
-		super(new Level1State(MAX_MOVES));
+		super();
+		initialize(new Level2State(MAX_MOVES));
 	}
 
 
 	@Override
 	protected void fillCells() {
-		genCell = new CandyGeneratorCell(this);
+		setGenCell(new CandyGeneratorCell(this));
 		super.fillCells();
 	}
 
@@ -28,39 +27,40 @@ public class Level2 extends Grid {
 	public boolean tryMove(int i1, int j1, int i2, int j2) {
 		boolean ret;
 		if (ret = super.tryMove(i1, j1, i2, j2)) {
-			state().addMove();
+			getState().addMove();
 			setGoldenCross(i2, j2);
 		}
 		return ret;
 	}
 
+
 	private void setGoldenCross(int r, int c){
 
 		int newGoldenCells = 0;
 
-		for(int i=0; i<SIZE; i++){
-			if(g()[r][i].getEffect()==null){
-				g()[r][i].setEffect(Cell.CellEffect.GOLDEN);
+		for(int i=0; i<getSize(); i++){
+			if(getGrid()[r][i].getEffect()==null){
+				getGrid()[r][i].setEffect(Cell.CellEffect.GOLDEN);
 				newGoldenCells += 1;
 			}
-			if(g()[i][c].getEffect()==null){
-				g()[i][c].setEffect(Cell.CellEffect.GOLDEN);
+			if(getGrid()[i][c].getEffect()==null){
+				getGrid()[i][c].setEffect(Cell.CellEffect.GOLDEN);
 				newGoldenCells += 1;
 			}
 		}
-		((Level1State) state()).addGoldenCells(newGoldenCells);
-		wasUpdated();
+		((Level2State) getState()).addGoldenCells(newGoldenCells);
+		gridUpdated();
 	}
 
 
 	// -------------------------------------------------------- GAME STATE --------------------------------------------------------
 
-	static private class Level1State extends GameState {
+	private class Level2State extends GameState {
 
 		private long maxMoves;
 		private long goldenCells=0;
 		
-		public Level1State(int maxMoves) {
+		public Level2State(int maxMoves) {
 			this.maxMoves = maxMoves;
 		}
 
@@ -71,12 +71,12 @@ public class Level2 extends Grid {
 
 		@Override
 		public boolean playerWon() {
-			return goldenCells==SIZE*SIZE;
+			return goldenCells==getSize()*getSize();
 		}
 
 		@Override
 		public String toString() {
-			return String.format("%s \nRemaining cells: %d", super.toString(), SIZE*SIZE-goldenCells);
+			return String.format("%s \nRemaining cells: %d", super.toString(),getSize()*getSize()-goldenCells);
 		}
 
 		private void addGoldenCells(int newGoldenCells){

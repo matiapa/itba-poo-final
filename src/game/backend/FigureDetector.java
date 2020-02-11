@@ -32,7 +32,7 @@ public class FigureDetector {
 		for (Checkpoint cp: Checkpoint.values()) {
 			int newI = i + cp.getI();
 			int newJ = j + cp.getJ();
-			if (newI >= 0 && newI < Grid.SIZE && newJ >= 0 && newJ < Grid.SIZE) {
+			if (newI >= 0 && newI < Grid.getSize() && newJ >= 0 && newJ < Grid.getSize()) {
 				if (curr.equals(grid.get(newI, newJ))) {
 					acum += cp.getValue();
 				}

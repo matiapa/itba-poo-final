@@ -44,7 +44,7 @@ public abstract class Move {
 	}
 	
 	protected void wasUpdated(){
-		grid.wasUpdated();
+		grid.gridUpdated();
 	}
 	
 	public abstract void removeElements();
