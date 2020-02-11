@@ -10,16 +10,10 @@ import java.util.TimerTask;
 public class Level4 extends Grid {
 
     private static int INITIAL_TIME = 60;
-<<<<<<< HEAD
+    private static int TIME_BONUS_ADDITIONAL_TIME = 10;
 
-    private static int NUMBER_OF_TIME_PROVIERS = 15;
-    public static int ADDITIONAL_TIME = 10;
-    private static double BOMB_FREQUENCY = 0.1;
-=======
     private static int TIME_BONUS_AMOUNT = 20;
-    public static int TIME_BONUS_ADDITIONAL_TIME = 20;
     private static double TIME_BONUS_FREQUENCY = 0.1;
->>>>>>> 95d98f30f39709a05f5c309557587ed066099d4a
 
     public Level4() {
         super();
@@ -28,11 +22,7 @@ public class Level4 extends Grid {
 
     @Override
     protected void fillCells() {
-<<<<<<< HEAD
-        genCell = new TimeProviderCandyGeneratorCell(this, NUMBER_OF_TIME_PROVIERS, BOMB_FREQUENCY);
-=======
         genCell = new TimeProviderCandyGeneratorCell(this, TIME_BONUS_AMOUNT, TIME_BONUS_FREQUENCY);
->>>>>>> 95d98f30f39709a05f5c309557587ed066099d4a
         super.fillCells();
     }
 
@@ -46,7 +36,7 @@ public class Level4 extends Grid {
         return ret;
     }
 
-    public static int getAdditionalTime() { return ADDITIONAL_TIME; }
+    public static int getAdditionalTime() { return TIME_BONUS_ADDITIONAL_TIME; }
 
     public void timeProviderConsumed() {
         ((Level4State) state()).timeProviderConsumed();
@@ -58,18 +48,6 @@ public class Level4 extends Grid {
 
         private int timeProviderConsumed = 0;
         private boolean timesUp = false;
-<<<<<<< HEAD
-        private int timer = INITIAL_TIME;
-        /*private Timer timer = new Timer();//TODO
-
-
-        private TimerTask timerTask = new TimerTask() {
-            @Override
-            public void run() {
-                Platform.runLater(new TimerTask() {
-                    @Override
-                    public void run() {
-=======
         private int timeCount = Level4.INITIAL_TIME;
 
 
@@ -81,7 +59,7 @@ public class Level4 extends Grid {
                         @Override
                         public void run() {
                             timeCount -= 1;
-                            if (timeCount == 0)//TODO
+                            if (timeCount == 0)
                                 timesUp();
                             scorePanelUpdated();
                         }
@@ -90,21 +68,14 @@ public class Level4 extends Grid {
             };
             (new Timer()).scheduleAtFixedRate(timerTask, 0, 1000);
         }
->>>>>>> 95d98f30f39709a05f5c309557587ed066099d4a
 
 
         public boolean gameOver() {
             return playerWon() || timesUp;
         }
 
-<<<<<<< HEAD
-        public boolean playerWon() {//TODO y timer es distinto de cero
-
-            return timeProviderConsumed == NUMBER_OF_TIME_PROVIERS && timer != 0;
-=======
         public boolean playerWon() {
             return timeProviderConsumed == TIME_BONUS_AMOUNT && timeCount != 0;
->>>>>>> 95d98f30f39709a05f5c309557587ed066099d4a
         }
 
         private void timesUp() {
@@ -112,20 +83,16 @@ public class Level4 extends Grid {
         }
 
         private void timeProviderConsumed(){
-<<<<<<< HEAD
-            timeProviderConsumed++;
-            timer += ADDITIONAL_TIME;
-        } //TODO timer
-=======
             System.out.println("Consumed");
             //timeProviderConsumed++;
-            //timeCount += TIME_BONUS_ADDITIONAL_TIME;
+            timeCount += TIME_BONUS_ADDITIONAL_TIME;
         }
->>>>>>> 95d98f30f39709a05f5c309557587ed066099d4a
 
         @Override
         public String toString() {
             return String.format("%s \nRemaining time: %d", super.toString(), timeCount);
         }
     }
+
+
 }

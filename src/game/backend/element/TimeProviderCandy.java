@@ -20,6 +20,11 @@ public class TimeProviderCandy extends Candy {
             public void onValidMove() {
                 ((Level4) grid).timeProviderConsumed();
             }
+
+            @Override
+            public void scorePanelUpdated() {}
+
+
         });
     }
 
