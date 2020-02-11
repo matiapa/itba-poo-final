@@ -75,3 +75,11 @@ Se agrego el parametro gridLoaded a Grid, y se lo utilizo en los metodos explode
 ---------------------------------------------------------------------------------------------------------
 
 Se redujeron muchos niveles de accesos excesivos
+
+---------------------------------------------------------------------------------------------------------
+
+Se cambio la propiedad grid de Cell a protected, el getter causaba problemas
+
+---------------------------------------------------------------------------------------------------------
+
+Se agrego Level 5

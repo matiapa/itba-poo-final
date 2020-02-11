@@ -112,7 +112,7 @@ public class Cell {
 
 	public void setEffect(CellEffect effect){ this.effect=effect; }
 
-	public enum CellEffect{ GOLDEN }
+	public enum CellEffect{ GOLDEN, SANDYBROWN }
 
 
 	// -------------------------------------------------------- GRID --------------------------------------------------------

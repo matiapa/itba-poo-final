@@ -83,6 +83,11 @@ public class BoardPanel extends TilePane {
 				spotLight.setColor(Color.YELLOW);
 				spotLight.setElevation(100);
 				return new Lighting(spotLight);
+			case SANDYBROWN:
+				spotLight = new Light.Distant();
+				spotLight.setColor(Color.SANDYBROWN);
+				spotLight.setElevation(100);
+				return new Lighting(spotLight);
 			default:
 				return null;
 		}
