@@ -59,7 +59,7 @@ public class Level4 extends Grid {
                         @Override
                         public void run() {
                             timeCount -= 1;
-                            if (timeCount == 0)
+                            if (timeCount == 0)//TODO
                                 timesUp();
                             scorePanelUpdated();
                         }
@@ -85,7 +85,7 @@ public class Level4 extends Grid {
         private void timeProviderConsumed(){
             System.out.println("Consumed");
             //timeProviderConsumed++;
-            timeCount += TIME_BONUS_ADDITIONAL_TIME;
+            //timeCount += TIME_BONUS_ADDITIONAL_TIME;
         }
 
         @Override
