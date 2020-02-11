@@ -8,8 +8,8 @@ public class Level4 extends Grid {
 
     private static int INITIAL_TIME = 60;
 
-    private static int NUMBER_OF_BOMBS = 20;
-    public static int BOMB_ADDITIONAL_TIME = 20;
+    private static int NUMBER_OF_TIME_PROVIERS = 15;
+    public static int ADDITIONAL_TIME = 10;
     private static double BOMB_FREQUENCY = 0.1;
 
     public Level4() {
@@ -18,7 +18,7 @@ public class Level4 extends Grid {
 
     @Override
     protected void fillCells() {
-        genCell = new TimeProviderCandyGeneratorCell(this, NUMBER_OF_BOMBS, BOMB_FREQUENCY);
+        genCell = new TimeProviderCandyGeneratorCell(this, NUMBER_OF_TIME_PROVIERS, BOMB_FREQUENCY);
         super.fillCells();
     }
 
@@ -32,6 +32,8 @@ public class Level4 extends Grid {
         return ret;
     }
 
+    public static int getAdditionalTime() { return ADDITIONAL_TIME; }
+
     public void timeProviderConsumed() {
         ((Level4State) state()).timeProviderConsumed();
     }
@@ -43,7 +45,7 @@ public class Level4 extends Grid {
         private int timeProviderConsumed = 0;
 
         private boolean timesUp = false;
-        private int timer;
+        private int timer = INITIAL_TIME;
         /*private Timer timer = new Timer();//TODO
 
 
@@ -70,7 +72,7 @@ public class Level4 extends Grid {
 
         public boolean playerWon() {//TODO y timer es distinto de cero
 
-            return timeProviderConsumed == NUMBER_OF_BOMBS && timer != 0;
+            return timeProviderConsumed == NUMBER_OF_TIME_PROVIERS && timer != 0;
         }
 
         private void timesUp() {
@@ -79,7 +81,7 @@ public class Level4 extends Grid {
 
         private void timeProviderConsumed(){
             timeProviderConsumed++;
-            timer += BOMB_ADDITIONAL_TIME;
+            timer += ADDITIONAL_TIME;
         } //TODO timer
 
         @Override

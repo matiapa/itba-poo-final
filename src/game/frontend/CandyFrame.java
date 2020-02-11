@@ -6,6 +6,7 @@ import game.backend.cell.Cell;
 import game.backend.element.BombCandy;
 import game.backend.element.Element;
 
+import game.backend.element.TimeProviderCandy;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.geometry.Point2D;
@@ -78,7 +79,14 @@ public class CandyFrame extends VBox {
 
 						Image image = images.getImage(element);
 						Cell.CellEffect effect = cell.getEffect();
-						String overlayText = (cell.getContent() instanceof BombCandy) ? ""+((BombCandy) cell.getContent()).getRemainingMoves() : null;
+
+						String overlayText;
+						if (cell.getContent() instanceof BombCandy)
+							overlayText = ""+((BombCandy) cell.getContent()).getRemainingMoves();
+						else if (cell.getContent() instanceof TimeProviderCandy)
+							overlayText = "+"+((TimeProviderCandy) cell.getContent()).getAdditionalTime();
+						else
+							overlayText = null;
 
 						// Adds to timeline a call to boardPanel.setImage with new image
 						int finalI = i, finalJ = j;
