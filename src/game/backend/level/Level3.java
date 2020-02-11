@@ -8,7 +8,7 @@ import game.backend.element.BombCandy;
 public class Level3 extends Grid {
 
 	private static int BOMB_INITIAL_MOVES = 10;
-	private static int NUMBER_OF_BOMBS = 20;
+	private static int NUMBER_OF_BOMBS = 15;
 	private static double BOMB_FREQUENCY = 0.1;
 
 	public static int getInitialMoves(){ return BOMB_INITIAL_MOVES; }
@@ -32,7 +32,7 @@ public class Level3 extends Grid {
 		boolean ret;
 		if (ret = super.tryMove(i1, j1, i2, j2)) {
 			state().addMove();
-			//updateBombCandies();
+			//updateBombCandies();//TODO dejaste esto asa
 			wasUpdated();
 		}
 		return ret;
