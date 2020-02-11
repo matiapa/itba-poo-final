@@ -33,6 +33,7 @@ public abstract class Grid {
 	private FigureDetector figureDetector;
 
 	protected GeneratorCell genCell;
+	public boolean gridLoadReady;
 
 	// -------------------------------------------------------- CONSTRUCTION --------------------------------------------------------
 
@@ -55,6 +56,7 @@ public abstract class Grid {
 		this.state = state;
 		fillCells();
 		fallElements();
+		gridLoadReady = true;
 	}
 
 	public Grid(GameState state){

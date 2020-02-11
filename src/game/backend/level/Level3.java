@@ -41,7 +41,9 @@ public class Level3 extends Grid {
 
 	public void informBombRemainingMoves(int newRemainingMovements){ ((Level3State) state()).informBombRemainingMoves(newRemainingMovements); }
 
-	public void bombDeactivated(){ ((Level3State) state()).bombDeactivated(); }
+	public void bombDeactivated(){ ((Level3State) state()).bombDeactivated();
+		System.out.println("DEACTIVATED");
+	}
 
 	public void bombExploded(){ ((Level3State) state()).bombExploded(); }
 

@@ -6,7 +6,7 @@ import game.backend.cell.Cell;
 import game.backend.element.BombCandy;
 import game.backend.element.Element;
 
-import game.backend.element.TimeProviderCandy;
+import game.backend.element.TimeBonusCandy;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.geometry.Point2D;
@@ -83,8 +83,8 @@ public class CandyFrame extends VBox {
 						String overlayText;
 						if (cell.getContent() instanceof BombCandy)
 							overlayText = ""+((BombCandy) cell.getContent()).getRemainingMoves();
-						else if (cell.getContent() instanceof TimeProviderCandy)
-							overlayText = "+"+((TimeProviderCandy) cell.getContent()).getAdditionalTime();
+						else if (cell.getContent() instanceof TimeBonusCandy)
+							overlayText = "+"+((TimeBonusCandy) cell.getContent()).getAdditionalTime();
 						else
 							overlayText = null;
 

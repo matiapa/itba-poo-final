@@ -39,7 +39,10 @@ public class BombCandy extends Candy {
 
     @Override
     public Direction[] explode() {
-        ((Level3) grid).bombDeactivated();
+        // This is to avoid the figures that get formed during grid loading
+        if(grid.gridLoadReady) {
+            ((Level3) grid).bombDeactivated();
+        }
         return super.explode();
     }
 

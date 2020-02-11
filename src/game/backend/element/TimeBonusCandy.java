@@ -5,9 +5,9 @@ import game.backend.Grid;
 import game.backend.level.Level4;
 import game.backend.move.Direction;
 
-public class TimeProviderCandy extends Candy {
+public class TimeBonusCandy extends Candy {
 
-    public TimeProviderCandy(Grid grid, CandyColor color) {
+    public TimeBonusCandy(Grid grid, CandyColor color) {
         super(grid, color);
 
         grid.addListener(new GameListener(){
@@ -16,14 +16,9 @@ public class TimeProviderCandy extends Candy {
 
             @Override public void cellExplosion(Element e){}
 
-            @Override
-            public void onValidMove() {
-                ((Level4) grid).timeProviderConsumed();
-            }
+            @Override public void onValidMove(){}
 
-            @Override
-            public void scorePanelUpdated() {}
-
+            @Override public void scorePanelUpdated(){}
 
         });
     }
@@ -35,7 +30,11 @@ public class TimeProviderCandy extends Candy {
 
     @Override
     public Direction[] explode() {
-        ((Level4)grid).timeProviderConsumed();
+        // This is to avoid the figures that get formed during grid loading
+        if(grid.gridLoadReady){
+            ((Level4) grid).timeProviderConsumed();
+        }
         return super.explode();
     }
+
 }
