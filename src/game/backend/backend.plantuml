@@ -343,21 +343,11 @@ MoveMaker *-- Move
 
 class Move{
  - grid: Grid
- - specialAction: SpecialAction
  # i1, j1, i2, j2: int
  + setCoords(int,int,int,int): void
  + isValid(): bool
- + executeSpecialAction(): void
 }
 
-Move *-- SpecialAction
-
-
-' SpecialAction '
-
-enum SpecialAction{
- WALL_HOR_REMOVE, WALL_VERT_REMOVE
-}
 
 ' IRR ' Move *-- Grid
 
