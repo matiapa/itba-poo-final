@@ -1,8 +1,103 @@
+@startuml
+
+' --------------- FRONTEND --------------- '
+
+'GameApp'
+
 class GameApp{
+ - stage: Stage
+ + scenes: Map<>
+
  + main(String[]): void
  + start(Stage): void
  - playLevel(Stage, String): void
+ - createMainMenu(): void
+ - playLevel(String): void
+ + setScene(AppScene): void
+ - showLevelInfoDialog(Class<Grid>): void
+}
+
+GameApp *-- Stage
+Application <-- GameApp
+
+
+'AppScene'
+
+enum AppScene{
+ MENU, GAME_FRAME
+}
+
+
+'AppMenu'
+
+class AppMenu{
 
 }
 
-Application <-- GameApp
+MenuBar <-- AppMenu
+
+
+
+class ImageManager {
+ - IMAGE_PATH: String
+ - images: Map<String, Image>
+
+ + getImage(Element): Image
+}
+
+ImageManager *-- Image
+
+
+'ScorePanel'
+
+class ScorePanel {
+ - scoreLabel: Label
+
+ + updateStateInfo(String): void
+}
+
+BorderPane <-- ScorePanel
+ScorePanel *-- Label
+
+
+'CandyFrame'
+
+class CandyFrame {
+ - CELL_SIZE: int
+ - boardPanel: BoardPanel
+ - scorePanel: ScorePanel
+ - images: ImageManager
+ - lastPoint: Point2D
+ - app: Point2D
+ - game: CandyGame
+ - dialogShown: boolean
+
+ - game(): CandyGame
+ - translateCoords(double, double): Point2D
+ - showWonDialog(): void
+ - showLostDialog(): void
+}
+
+VBox <-- CandyFrame
+CandyFrame *-- BoardPanel
+CandyFrame *-- ScorePanel
+CandyFrame *-- ImageManager
+CandyFrame *-- Point2D
+CandyFrame *-- CandyGame
+
+
+'BoardPanel'
+
+class BoardPanel {
+ - cells: StackPane[][]
+
+ + setImage(int, int, Image, Cell.CellEffect, String): void
+ - getEffect(Cell.CellEffect): Effect
+}
+
+TilePane <-- BoardPanel
+BoardPanel *-- Effect
+BoardPanel *-- StackPane
+
+
+@enduml
