@@ -18,9 +18,7 @@ public class BombCandy extends Candy {
             @Override public void cellExplosion(Element e){}
 
             @Override
-            public void scorePanelUpdated() {
-
-            }
+            public void scorePanelUpdated(){}
 
             @Override
             public void onValidMove() {

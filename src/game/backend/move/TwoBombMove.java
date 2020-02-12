@@ -4,8 +4,8 @@ import game.backend.Grid;
 
 public class TwoBombMove extends Move {
 	
-	public TwoBombMove(Grid grid, SpecialAction action) {
-		super(grid, action);
+	public TwoBombMove(Grid grid) {
+		super(grid);
 	}
 	
 	@Override

@@ -6,8 +6,8 @@ import game.backend.element.Candy;
 
 public class BombMove extends Move {
 	
-	public BombMove(Grid grid, SpecialAction action) {
-		super(grid, action);
+	public BombMove(Grid grid) {
+		super(grid);
 	}
 
 	@Override

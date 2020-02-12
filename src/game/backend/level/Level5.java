@@ -5,6 +5,9 @@ import game.backend.Grid;
 import game.backend.cell.BombCandyGeneratorCell;
 import game.backend.cell.CandyGeneratorCell;
 import game.backend.cell.Cell;
+import game.backend.element.Element;
+import game.backend.element.HorizontalStripedCandy;
+import game.backend.element.VerticalStripedCandy;
 
 public class Level5 extends Grid {
 
@@ -21,7 +24,7 @@ public class Level5 extends Grid {
 
     @Override
     protected void fillCells() {
-        setGenCell(new CandyGeneratorCell(this));
+        setGenCell(new BombCandyGeneratorCell(this, 70, 0.8));
         super.fillCells();
     }
 
@@ -29,10 +32,38 @@ public class Level5 extends Grid {
     @Override
     public boolean tryMove(int i1, int j1, int i2, int j2) {
         boolean ret;
+        Element c1 = grid[i1][j1].getContent();
+        Element c2 = grid[i2][j2].getContent();
+
         if (ret = super.tryMove(i1, j1, i2, j2)) {
             getState().addMove();
+            if(c1 instanceof HorizontalStripedCandy || c2 instanceof HorizontalStripedCandy){
+                removeCellWallRow(i2);
+            }
+            if(c1 instanceof VerticalStripedCandy || c2 instanceof VerticalStripedCandy){
+                removeCellWallColumn(j2);
+            }
+            gridUpdated();
         }
         return ret;
+    }
+
+    public void removeCellWallRow(int i){
+        for(int j=0; j<getSize(); j++) {
+            if(grid[i][j].getEffect()!= Cell.CellEffect.NONE){
+                ((Level5State) getState()).removeWall();
+                grid[i][j].setEffect(Cell.CellEffect.NONE);
+            }
+        }
+    }
+
+    public void removeCellWallColumn(int j){
+        for(int i=0; i<getSize(); i++) {
+            if(grid[i][j].getEffect()!= Cell.CellEffect.NONE) {
+                ((Level5State) getState()).removeWall();
+                grid[i][j].setEffect(Cell.CellEffect.NONE);
+            }
+        }
     }
 
 
