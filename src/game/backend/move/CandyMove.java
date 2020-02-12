@@ -10,10 +10,10 @@ public class CandyMove extends Move {
 	private Figure f2;
 	
 	private FigureDetector detector;
-	private Grid grid;
+	protected Grid grid;
 	
-	public CandyMove(Grid grid) {
-		super(grid);
+	public CandyMove(Grid grid, SpecialAction action) {
+		super(grid, action);
 		this.grid = grid;
 	}
 

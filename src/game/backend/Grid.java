@@ -130,6 +130,7 @@ public abstract class Grid {
 		if (move.isValid()) {
 			validMoveMade();
 			move.removeElements();
+			move.executeSpecialAction();
 			fallElements();
 			return true;
 		} else {

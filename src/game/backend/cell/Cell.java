@@ -10,7 +10,7 @@ public class Cell {
 	protected Grid grid;
 	private Cell[] around = new Cell[Direction.values().length];
 	private Element content;
-	private CellEffect effect;
+	private CellEffect effect = Cell.CellEffect.NONE;
 
 	public Cell(Grid grid) {
 		this.grid = grid;
@@ -112,7 +112,7 @@ public class Cell {
 
 	public void setEffect(CellEffect effect){ this.effect=effect; }
 
-	public enum CellEffect{ GOLDEN, SANDYBROWN }
+	public enum CellEffect{ GOLDEN, SANDYBROWN, NONE}
 
 
 	// -------------------------------------------------------- GRID --------------------------------------------------------

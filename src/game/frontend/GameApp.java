@@ -1,15 +1,15 @@
 package game.frontend;
 
 import game.backend.CandyGame;
-import game.backend.level.Level2;
-import game.backend.level.Level3;
-import game.backend.level.Level4;
+import game.backend.Grid;
+import game.backend.level.*;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -20,6 +20,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -43,7 +44,7 @@ public class GameApp extends Application {
 		scenes.put(AppScene.MENU, createMainMenu());
 		setScene(AppScene.MENU);
 
-		stage.setResizable(true);
+		stage.setResizable(false);
 		stage.show();
 
 	}
@@ -85,7 +86,7 @@ public class GameApp extends Application {
 		Class levelClass;
 		switch(levelName){
 			case "Level 1":
-				levelClass = Level2.class;
+				levelClass = Level1.class;
 				break;
 			case "Level 2":
 				levelClass = Level2.class;
@@ -97,7 +98,7 @@ public class GameApp extends Application {
 				levelClass = Level4.class;
 				break;
 			case "Level 5":
-				levelClass = Level3.class; //TODO: Update with new level
+				levelClass = Level5.class;
 				break;
 			default:
 				levelClass = null;
@@ -111,10 +112,22 @@ public class GameApp extends Application {
 		scenes.put(AppScene.GAME_FRAME, new Scene(new CandyFrame(this, game)));
 		setScene(AppScene.GAME_FRAME);
 
+		showLevelInfoDialog(levelClass);
+
 	}
 
 	public void setScene(AppScene sceneName){ stage.setScene(scenes.get(sceneName)); }
 
-
+	private void showLevelInfoDialog(Class<Grid> level){
+		Alert alert = new Alert(Alert.AlertType.INFORMATION);
+		alert.setTitle("It's time to play!");
+		alert.setHeaderText(level.getSimpleName());
+		try {
+			alert.setContentText((String) level.getDeclaredMethod("levelInfo").invoke(null,null));
+		} catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+			e.printStackTrace();
+		}
+		alert.showAndWait();
+	}
 
 }

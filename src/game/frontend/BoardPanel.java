@@ -1,10 +1,7 @@
 package game.frontend;
 
 import game.backend.cell.Cell;
-import javafx.scene.effect.DropShadow;
-import javafx.scene.effect.Effect;
-import javafx.scene.effect.Light;
-import javafx.scene.effect.Lighting;
+import javafx.scene.effect.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
@@ -45,9 +42,7 @@ public class BoardPanel extends TilePane {
 		ImageView imageView = new ImageView(image);
 
 		// Set effect if necessary
-		if(cellEffectName!=null){
-			cells[row][column].setEffect(getEffect(cellEffectName));
-		}
+		cells[row][column].setEffect(getEffect(cellEffectName));
 
 		// Add it to the pane
 		cells[row][column].getChildren().add(imageView);
@@ -77,6 +72,7 @@ public class BoardPanel extends TilePane {
 	}
 
 	private Effect getEffect(Cell.CellEffect effectName){
+		effectName = effectName!=null ? effectName : Cell.CellEffect.NONE;
 		switch(effectName){
 			case GOLDEN:
 				Light.Distant spotLight = new Light.Distant();
@@ -84,10 +80,12 @@ public class BoardPanel extends TilePane {
 				spotLight.setElevation(100);
 				return new Lighting(spotLight);
 			case SANDYBROWN:
-				spotLight = new Light.Distant();
-				spotLight.setColor(Color.SANDYBROWN);
-				spotLight.setElevation(100);
-				return new Lighting(spotLight);
+				Light.Distant spotLight2 = new Light.Distant();
+				spotLight2.setColor(Color.SANDYBROWN);
+				spotLight2.setElevation(100);
+				return new Lighting(spotLight2);
+			case NONE:
+				return new BoxBlur(0.0,0.0,0);
 			default:
 				return null;
 		}

@@ -107,7 +107,9 @@ public class CandyFrame extends VBox {
 
 		});
 
+		// First render
 		listener.gridUpdated();
+		listener.scorePanelUpdated();
 
 		// Adds handler for clicks
 		addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {

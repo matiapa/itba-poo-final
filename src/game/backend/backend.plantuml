@@ -201,7 +201,7 @@ SpecialCandyGeneratorCell <-- TimeBonusCandyGeneratorCell
 ' Element '
 
 abstract class Element{
- - grid: Grid
+ # grid: Grid
  + {abstract} isMovable(): bool
  + {abstract} getKey(): String
  + {abstract} getScore(): int
@@ -270,10 +270,20 @@ enum CandyColor{
 class BombCandy{
  - remainingMoves: int
  + getRemainingMoves(): int
- + decreaseRemainingMoves(): void
+ + explode(): Direction[]
 }
 
 Candy <-- BombCandy
+
+
+' TimeBonusCandy '
+
+class TimeBonusCandy{
+ + getAdditionalTime(): void
+ + explode(): Direction[]
+}
+
+Candy <-- TimeBonusCandy
 
 
 ' HorizontalStripedCandy '
@@ -333,9 +343,20 @@ MoveMaker *-- Move
 
 class Move{
  - grid: Grid
+ - specialAction: SpecialAction
  # i1, j1, i2, j2: int
  + setCoords(int,int,int,int): void
  + isValid(): bool
+ + executeSpecialAction(): void
+}
+
+Move *-- SpecialAction
+
+
+' SpecialAction '
+
+enum SpecialAction{
+ WALL_HOR_REMOVE, WALL_VERT_REMOVE
 }
 
 ' IRR ' Move *-- Grid

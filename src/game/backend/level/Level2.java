@@ -52,6 +52,9 @@ public class Level2 extends Grid {
 		gridUpdated();
 	}
 
+	static public String levelInfo() {
+		return "Each explosion turns its row and column in gold. You should turn all the cells gold in no more than "+MAX_MOVES+" moves";
+	}
 
 	// -------------------------------------------------------- GAME STATE --------------------------------------------------------
 

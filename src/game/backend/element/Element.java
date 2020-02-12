@@ -32,7 +32,5 @@ public abstract class Element{
 	public long getScore() {
 		return 0;
 	}
-
-
 	
 }

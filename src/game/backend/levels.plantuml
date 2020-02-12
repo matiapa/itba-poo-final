@@ -2,13 +2,38 @@
 
 ' --------------- LEVELS --------------- '
 
+' Level1 '
+
+class Level1{
+ - {static} MAX_MOVES: int
+ - {static} REQUIRED_SCORE: int
+ # fillCells(): void
+ + tryMove(): bool
+ + {static} levelInfo(): String
+}
+
+Level1 *-- Level1State
+
+
+' Level1State '
+
+class Level1State{
+ - requiredScore: int
+ - maxMoves: int
+ + gameOver(): bool
+ + playerWon(): bool
+ + toString(): String
+}
+
+
 ' Level2 '
 
 class Level2{
- - MAX_MOVES: int
+ - {static} MAX_MOVES: int
  # fillCells(): void
  + tryMove(): bool
  - setGoldenCross(): void
+ + {static} levelInfo(): String
 }
 
 Grid <-- Level2
@@ -32,15 +57,16 @@ GameState <-- Level2State
 ' Level3 '
 
 class Level3 {
-  - BOMB_FREQUENCY : double
-  - BOMB_INITIAL_MOVES : int
-  - NUMBER_OF_BOMBS : int
+  - {static} BOMB_FREQUENCY : double
+  - {static} BOMB_INITIAL_MOVES : int
+  - {static} NUMBER_OF_BOMBS : int
   + tryMove(): bool
   # fillCells(): void
   + informBombRemainingMoves(int): void
   + bombDeactivated(): void
   + bombExploded(): void
   + getBombInitialMoves(): int
+  + {static} levelInfo(): String
 }
 
 Grid <-- Level3
@@ -67,14 +93,15 @@ GameState <-- Level3State
 ' Level4 '
 
 class Level4{
- - INITIAL_TIME: int
- - TIME_BONUS_ADDITIONAL_TIME: int
- - TIME_BONUS_AMOUNT: int
- - TIME_BONUS_FREQUENCY: double
+ - {static} INITIAL_TIME: int
+ - {static} TIME_BONUS_ADDITIONAL_TIME: int
+ - {static} TIME_BONUS_AMOUNT: int
+ - {static} TIME_BONUS_FREQUENCY: double
  # fillCells(): void
  + tryMove(): bool
  + getAdditionalTime(): int
  + timeBonusConsumed(): void
+ + {static} levelInfo(): String
 }
 
 Grid <-- Level4
@@ -95,5 +122,35 @@ class Level4State{
 }
 
 GameState <-- Level4State
+
+
+' Level5 '
+
+class Level5{
+ - {static} MAX_MOVES
+ - {static} NUMBER_OF_WALLS
+ - {static} WALL_SIDE_LENGTH
+ # fillCells(): void
+ + tryMove(): bool
+ - paintInitialWalls(): void
+ + removeCellWall(int,int): void
+ + {static} levelInfo(): String
+}
+
+Level5 *-- Level5State
+
+
+' Level5State '
+
+class Level5State{
+ - maxMoves: int
+ - wallsLeft: int
+ + gameOver(): bool
+ + playerWon(): bool
+ + toString(): String
+ - removeWall(): void
+}
+
+GameState <-- Level5State
 
 @enduml

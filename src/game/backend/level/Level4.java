@@ -41,6 +41,11 @@ public class Level4 extends Grid {
         ((Level4State) getState()).timeProviderConsumed();
     }
 
+    static public String levelInfo() {
+        return TIME_BONUS+" time bonuses will be placed in the game, you have to consume them all through valid moves. If you run out of time, you loose";
+    }
+
+
 // -------------------------------------------------------- GAME STATE --------------------------------------------------------
 
     private class Level4State extends GameState {

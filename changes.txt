@@ -83,3 +83,18 @@ Se cambio la propiedad grid de Cell a protected, el getter causaba problemas
 ---------------------------------------------------------------------------------------------------------
 
 Se agrego Level 5
+
+---------------------------------------------------------------------------------------------------------
+
+Se agrego Level 1
+Se agrego un llamado a scorePanelUpdated() despues de setear en el first render en CandyFrame
+Se agrego el metodo levelInfo() en todos los Levels
+Se agrego el metodo showLevelInfo() en GameApp
+
+Se termino el Level 5
+Se creo el enum SpecialAction
+Se agrego la propiedad SpecialAction a Move y un metodo executeSpecialAction() para ejecutar WALL_HOR_REMOVE y WALL_VERT_REMOVE
+Se modifico el mapa de MoveMaker para que pase los SpecialAction correspondientes
+Se agrego al tryMove de Grid la llamada a executeSpecialAction()
+
+---------------------------------------------------------------------------------------------------------

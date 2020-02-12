@@ -46,6 +46,11 @@ public class Level3 extends Grid {
 	public static int getBombInitialMoves(){ return BOMB_INITIAL_MOVES; }
 
 
+	static public String levelInfo() {
+		return NUMBER_OF_BOMBS+" bombs will be placed in the game, you have to eliminate them all through valid moves. If a bomb reaches 0, you loose";
+	}
+
+
 	// -------------------------------------------------------- GAME STATE --------------------------------------------------------
 
 

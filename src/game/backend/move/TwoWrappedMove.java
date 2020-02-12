@@ -4,8 +4,8 @@ import game.backend.Grid;
 
 public class TwoWrappedMove extends Move {
 	
-	public TwoWrappedMove(Grid grid) {
-		super(grid);
+	public TwoWrappedMove(Grid grid, SpecialAction action) {
+		super(grid, action);
 	}
 	
 	@Override

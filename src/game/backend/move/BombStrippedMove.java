@@ -9,8 +9,8 @@ import game.backend.element.VerticalStripedCandy;
 
 public class BombStrippedMove extends Move {
 
-	public BombStrippedMove(Grid grid) {
-		super(grid);
+	public BombStrippedMove(Grid grid, SpecialAction action) {
+		super(grid, action);
 	}
 	
 	@Override
