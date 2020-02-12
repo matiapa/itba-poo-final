@@ -24,7 +24,7 @@ public class Level5 extends Grid {
 
     @Override
     protected void fillCells() {
-        setGenCell(new BombCandyGeneratorCell(this, 70, 0.8));
+        setGenCell(new CandyGeneratorCell(this));
         super.fillCells();
     }
 
