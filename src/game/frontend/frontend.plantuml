@@ -76,6 +76,7 @@ CandyFrame *-- BoardPanel
 CandyFrame *-- ScorePanel
 CandyFrame *-- ImageManager
 CandyFrame *-- CandyGame
+CandyFrame *-- AppMenu
 
 
 'BoardPanel'
