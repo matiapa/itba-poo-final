@@ -17,7 +17,6 @@ class GameApp{
  - showLevelInfoDialog(Class<Grid>): void
 }
 
-GameApp *-- Stage
 Application <-- GameApp
 
 
@@ -26,6 +25,7 @@ Application <-- GameApp
 enum AppScene{
  MENU, GAME_FRAME
 }
+AppScene *-- GameApp
 
 
 'AppMenu'
@@ -34,9 +34,8 @@ class AppMenu{
 
 }
 
-MenuBar <-- AppMenu
 
-
+'ImageManager'
 
 class ImageManager {
  - IMAGE_PATH: String
@@ -44,8 +43,6 @@ class ImageManager {
 
  + getImage(Element): Image
 }
-
-ImageManager *-- Image
 
 
 'ScorePanel'
@@ -55,9 +52,6 @@ class ScorePanel {
 
  + updateStateInfo(String): void
 }
-
-BorderPane <-- ScorePanel
-ScorePanel *-- Label
 
 
 'CandyFrame'
@@ -78,11 +72,9 @@ class CandyFrame {
  - showLostDialog(): void
 }
 
-VBox <-- CandyFrame
 CandyFrame *-- BoardPanel
 CandyFrame *-- ScorePanel
 CandyFrame *-- ImageManager
-CandyFrame *-- Point2D
 CandyFrame *-- CandyGame
 
 
@@ -94,10 +86,6 @@ class BoardPanel {
  + setImage(int, int, Image, Cell.CellEffect, String): void
  - getEffect(Cell.CellEffect): Effect
 }
-
-TilePane <-- BoardPanel
-BoardPanel *-- Effect
-BoardPanel *-- StackPane
 
 
 @enduml
