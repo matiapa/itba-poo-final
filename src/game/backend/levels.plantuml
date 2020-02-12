@@ -25,6 +25,8 @@ class Level1State{
  + toString(): String
 }
 
+GameState <-- Level1State
+
 
 ' Level2 '
 
